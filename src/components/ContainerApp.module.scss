@@ -6,15 +6,15 @@
   // display: inline-block;
   width: calc(100% - 4rem);
   display: flex;
-  justify-content: flex-start;
-  align-items: center;
+  justify-content: center;
+  // align-items: center;
   flex-wrap: wrap;
   min-height: 100vh;
 }
 .navSection {
   width: 4rem;
   height: 100vh;
-  background-color: red;
+  background-color: var(--color-white);
   position: fixed;
   right: 0;
   top: 0;
@@ -23,9 +23,11 @@
   align-items: center;
   flex-direction: column;
 }
-.icon {
-  background-color: aqua;
-  border: 1px solid black;
-  width: 6rem;
-  height: 6rem;
+
+
+.configIcon {
+  color: var(--color-gray);
+}
+.deleteIcon {
+  color: var(--color-red);
 }

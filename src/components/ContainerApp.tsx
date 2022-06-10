@@ -1,7 +1,13 @@
 import { nanoid } from 'nanoid'
 import { useEffect, useState } from 'react'
 import { typesOfSlots } from '../types/index'
+import AddButton from './AddSlot'
 import styles from './ContainerApp.module.scss'
+import EmptySlot from './EmptySlot'
+import ConfigurationIcon from './icons/ConfigurationIcon'
+import DeleteIcon from './icons/DeleteIcon'
+import ShortcutSlot from './ShorcutSlot'
+
 const ContainerApp = () => {
   const INITIAL_STATE: typesOfSlots[] = []
 
@@ -9,8 +15,8 @@ const ContainerApp = () => {
   // console.log(icons)
   useEffect(() => {
     if (!localStorage.getItem('info')) {
-      const numerosDeGrillasMaximoALoAncho = Math.floor((window.innerWidth - 16 * 4) / (6 * 16))
-      const numerosDeGrillasMaximoALoAlto = Math.floor(window.innerHeight / (6 * 16))
+      const numerosDeGrillasMaximoALoAncho = Math.floor((window.innerWidth - 16 * 4) / (7 * 16))
+      const numerosDeGrillasMaximoALoAlto = Math.floor(window.innerHeight / (7.5 * 16))
 
       const numeroDeGrillasMaximas = numerosDeGrillasMaximoALoAncho * numerosDeGrillasMaximoALoAlto
 
@@ -27,119 +33,26 @@ const ContainerApp = () => {
     }
   }, [])
 
-  const EmptySlot = ({ children, id }) => {
-    return (
-      <div
-        className={styles.icon}
-        onDragOver={(e) => {
-          e.preventDefault()
-        }}
-        id={id}
-        onDrop={(e) => {
-          const getDataId = e.dataTransfer.getData('text/plan')
-          const getCurrentTargetId = e.target.id
-
-          const newIcons = [...icons]
-
-          const DragElement = newIcons.find((e) => e.id === getDataId)
-          const DropElement = newIcons.find((e) => e.id === getCurrentTargetId)
-
-          const DragElementIndex = newIcons.findIndex((e) => e.id === getDataId)
-          const DropElementIndex = newIcons.findIndex((e) => e.id === getCurrentTargetId)
-
-          newIcons[DropElementIndex] = DragElement
-          newIcons[DragElementIndex] = DropElement
-
-          setIcons(newIcons)
-        }}
-      >
-        {children}
-      </div>
-    )
-  }
-
-  function addNewFolder(id: string) {
-    const newIcons = [...icons]
-    const indexOfAddButton = newIcons.findIndex((e) => e.id === id)
-
-    const pedazoParaComprobar = newIcons.slice(0, indexOfAddButton)
-
-    if (!pedazoParaComprobar.some((e) => e.type === 'empty')) {
-      newIcons[indexOfAddButton] = { id, type: 'shortcut' }
-
-      const indexOfFirstEmpty = newIcons.findIndex((e) => e.type === 'empty')
-
-      if (indexOfFirstEmpty >= 0) {
-        newIcons[indexOfFirstEmpty] = {
-          id: newIcons[indexOfFirstEmpty].id,
-          type: 'buttonAdd',
-        }
-      }
-    } else {
-      const indexOfFirstEmpty = newIcons.findIndex((e) => e.type === 'empty')
-
-      newIcons[indexOfFirstEmpty] = {
-        id: newIcons[indexOfFirstEmpty].id,
-        type: 'shortcut',
-      }
-      console.log(indexOfFirstEmpty)
-    }
-    console.log(newIcons)
-    setIcons(newIcons)
-  }
-
-  const Add = ({ children, id }) => {
-    return (
-      <button className={styles.icon} onClick={() => addNewFolder(id)} id={id}>
-        {children}
-      </button>
-    )
-  }
-  const Shortcut = ({ children, id }) => {
-    return (
-      <div
-        className={styles.icon}
-        draggable
-        onDragStart={(e) => {
-          e.dataTransfer.setData('text/plan', e.target.id)
-          console.log(e.dataTransfer)
-        }}
-        id={id}
-      >
-        {children}
-      </div>
-    )
-  }
   return (
     <main className={styles.containerApp}>
       <section className={styles.gridTemplate}>
         {icons.map((icon) => {
           switch (icon.type) {
             case 'empty':
-              return (
-                <EmptySlot key={icon.id} id={icon.id}>
-                  empty
-                </EmptySlot>
-              )
+              return <EmptySlot key={icon.id} id={icon.id} setIcons={setIcons} icons={icons} />
             case 'buttonAdd':
-              return (
-                <Add key={icon.id} id={icon.id}>
-                  add
-                </Add>
-              )
+              return <AddButton key={icon.id} id={icon.id} setIcons={setIcons} icons={icons} />
             case 'shortcut':
-              return (
-                <Shortcut key={icon.id} id={icon.id}>
-                  Shortcut
-                </Shortcut>
-              )
-
+              return <ShortcutSlot key={icon.id} id={icon.id} />
             default:
               throw new Error('No se contempla este typo de slot')
           }
         })}
       </section>
-      <nav className={styles.navSection}>sasdasdasdasd</nav>
+      <nav className={styles.navSection}>
+        <DeleteIcon className={styles.deleteIcon} />
+        <ConfigurationIcon className={styles.configIcon} />
+      </nav>
     </main>
   )
 }
