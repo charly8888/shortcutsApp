@@ -3,7 +3,12 @@ module.exports = {
     browser: true,
     es2021: true,
   },
-  extends: ['plugin:react/recommended', 'standard', 'prettier', 'plugin:react/jsx-runtime'],
+  extends: [
+    'plugin:react/recommended',
+    'plugin:react/jsx-runtime',
+    'standard',
+    'eslint-config-prettier',
+  ],
   parser: '@typescript-eslint/parser',
   parserOptions: {
     ecmaFeatures: {
@@ -18,5 +23,6 @@ module.exports = {
     'object-curly-spacing': ['error', 'always'],
     'eqeqeq': ['error', 'smart'],
     'no-multiple-empty-lines': ['error', { max: 1 }],
+    'react/prop-types': 'off',
   },
 }

@@ -1,5 +1,13 @@
+import Background from './components/background/Background'
+import ContainerApp from './components/ContainerApp'
+
 function App() {
-  return <h1>Holaasdasdaddasdasdasdasdasdasdasdasasdasdassdasdasdasdasdasdasdasdasdasdasdasdad</h1>
+  return (
+    <>
+      <Background />
+      <ContainerApp />
+    </>
+  )
 }
 
 export default App
