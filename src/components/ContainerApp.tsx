@@ -1,17 +1,20 @@
 import { nanoid } from 'nanoid'
 import { useEffect, useState } from 'react'
 import { typesOfSlots } from '../types/index'
-import AddButton from './AddSlot'
+import AddSlot from './AddSlot'
 import styles from './ContainerApp.module.scss'
 import EmptySlot from './EmptySlot'
+import AddIcon from './icons/AddIcon'
 import ConfigurationIcon from './icons/ConfigurationIcon'
 import DeleteIcon from './icons/DeleteIcon'
+import PortalShortcut from './portals/PortalShortcut'
 import ShortcutSlot from './ShorcutSlot'
 
 const ContainerApp = () => {
   const INITIAL_STATE: typesOfSlots[] = []
 
   const [icons, setIcons] = useState(INITIAL_STATE)
+  const [modalShortcut, setModalShortcut] = useState({ boolean: false, id: '' })
   // console.log(icons)
   useEffect(() => {
     if (!localStorage.getItem('info')) {
@@ -41,9 +44,22 @@ const ContainerApp = () => {
             case 'empty':
               return <EmptySlot key={icon.id} id={icon.id} setIcons={setIcons} icons={icons} />
             case 'buttonAdd':
-              return <AddButton key={icon.id} id={icon.id} setIcons={setIcons} icons={icons} />
+              return (
+                <AddSlot
+                  key={icon.id}
+                  openPortal={() => setModalShortcut({ boolean: true, id: icon.id })}
+                />
+              )
             case 'shortcut':
-              return <ShortcutSlot key={icon.id} id={icon.id} />
+              return (
+                <ShortcutSlot
+                  key={icon.id}
+                  id={icon.id}
+                  title={icon.title}
+                  description={icon.description}
+                  link={icon.link}
+                />
+              )
             default:
               throw new Error('No se contempla este typo de slot')
           }
@@ -51,10 +67,18 @@ const ContainerApp = () => {
       </section>
       <nav className={styles.navSection}>
         <DeleteIcon className={styles.deleteIcon} />
+        {/* <AddIcon onClick={() => setModalShortcut({ boolean: true})}/> */}
         <ConfigurationIcon className={styles.configIcon} />
       </nav>
+      {modalShortcut.boolean && (
+        <PortalShortcut
+          setIcons={setIcons}
+          icons={icons}
+          modalShortcut={modalShortcut}
+          closePortal={() => setModalShortcut({ boolean: false, id: '' })}
+        />
+      )}
     </main>
   )
 }
-
 export default ContainerApp

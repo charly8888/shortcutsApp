@@ -1,3 +1,17 @@
-.shortcut {
-  background-color: chartreuse;
+.containerContent {
+  width: 85%;
+  flex-grow: 1;
+  // background-color: chartreuse;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  a {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+  }
+  img {
+    width: 100%;
+  }
 }

@@ -1,15 +1,24 @@
+import { useState } from 'react'
 import styles from './EmptySlot.module.scss'
 import stylesGenerals from './GeneralStylesForGridItems.module.scss'
 
 const EmptySlot = ({ id, setIcons, icons }) => {
+  const [classOver, setClassOver] = useState(false)
   return (
     <div
-      className={`${styles.emptySlot} ${stylesGenerals.sizeGrid}`}
+      className={`${classOver && styles.onDragEnter} ${styles.emptySlot} ${
+        stylesGenerals.sizeGrid
+      }`}
       onDragOver={(e) => {
         e.preventDefault()
+        setClassOver(true)
+        // console.log("entra")
       }}
+      onDragLeave={() => setClassOver(false)}
+      
       id={id}
       onDrop={(e) => {
+         setClassOver(false)
         const getDataId = e.dataTransfer.getData('text/plan')
         const getCurrentTargetId = e.target.id
 

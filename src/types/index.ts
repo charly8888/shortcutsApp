@@ -11,6 +11,9 @@ export interface buttonAdd {
 export interface shortcut {
   id: string
   type: 'shortcut'
+  title: string
+  description: string
+  link: string
 }
 
 export type typesOfSlots = empty | buttonAdd | shortcut

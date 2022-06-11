@@ -1,10 +1,10 @@
-import styles from './ShortcutSlot.module.scss'
 import stylesGenerals from './GeneralStylesForGridItems.module.scss'
+import styles from './ShortcutSlot.module.scss'
 
-const ShortcutSlot = ({ id }) => {
+const ShortcutSlot = ({ id, title, description, link }) => {
   return (
     <div
-      className={`${styles.shortcut} ${stylesGenerals.sizeGrid}`}
+      className={` ${stylesGenerals.sizeGrid}`}
       draggable
       onDragStart={(e) => {
         e.dataTransfer.setData('text/plan', e.target.id)
@@ -12,7 +12,16 @@ const ShortcutSlot = ({ id }) => {
       }}
       id={id}
     >
-      
+      <div className={styles.containerContent}>
+        <img src={`${link}favicon.png`} />
+        <a
+          href={link}
+          target='_blank'
+          rel='noreferrer'
+          draggable={false}
+        ></a>
+      </div>
+      <p>{title}</p>
     </div>
   )
 }
