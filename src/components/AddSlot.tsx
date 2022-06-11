@@ -1,14 +1,14 @@
+import { FC } from 'react'
 import styles from './AddButton.module.scss'
-import stylesGenerals from './GeneralStylesForGridItems.module.scss'
 import AddIcon from './icons/AddIcon'
-
-const AddButton = ({ openPortal }) => {
+interface props {
+  openPortal: Function
+}
+const AddButton: FC<props> = ({ openPortal }) => {
   return (
-    <div className={`${stylesGenerals.sizeGrid}`}>
-      <button className={`${styles.addButton}`} onClick={openPortal}>
-        <AddIcon className={styles.AddIcon} />
-      </button>
-    </div>
+    <button className={`${styles.addButton}`} onClick={() => openPortal()}>
+      <AddIcon className={styles.AddIcon} />
+    </button>
   )
 }
 

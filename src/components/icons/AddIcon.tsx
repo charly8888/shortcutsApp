@@ -1,4 +1,7 @@
-function AddIcon({ className }) {
+import { PropsWithChildren } from 'react'
+type props = { className?: string }
+
+function AddIcon({ className }: PropsWithChildren<props>) {
   return (
     <svg
       fill='none'

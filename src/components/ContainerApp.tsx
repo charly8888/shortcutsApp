@@ -1,40 +1,35 @@
-import { nanoid } from 'nanoid'
 import { useEffect, useState } from 'react'
-import { typesOfSlots } from '../types/index'
+import { INITIAL_STATE_OF_GRID_ITEMS } from '../constants'
+import { setGridFirstTime } from '../lib/helpers'
 import AddSlot from './AddSlot'
 import styles from './ContainerApp.module.scss'
 import EmptySlot from './EmptySlot'
-import AddIcon from './icons/AddIcon'
+import FolderSlot from './FolderSlot'
 import ConfigurationIcon from './icons/ConfigurationIcon'
-import DeleteIcon from './icons/DeleteIcon'
+import PortalFolder from './portals/PortalFolder'
+import PortalSelector from './portals/PortalSelector'
 import PortalShortcut from './portals/PortalShortcut'
 import ShortcutSlot from './ShorcutSlot'
 
 const ContainerApp = () => {
-  const INITIAL_STATE: typesOfSlots[] = []
+  const [icons, setIcons] = useState(INITIAL_STATE_OF_GRID_ITEMS)
+  const [modalShortcut, setModalShortcut] = useState(false)
+  const [modalSelector, setModalSelector] = useState(false)
+  const [modalFolder, setModalFolder] = useState(false)
 
-  const [icons, setIcons] = useState(INITIAL_STATE)
-  const [modalShortcut, setModalShortcut] = useState({ boolean: false, id: '' })
+  useEffect(() => {
+    const items = JSON.parse(localStorage.getItem('info') || '[]')
+    if (!items.length) setIcons(setGridFirstTime())
+    else setIcons(items)
+    console.log('hola desde el efect normal ', icons)
+  }, [])
   // console.log(icons)
   useEffect(() => {
-    if (!localStorage.getItem('info')) {
-      const numerosDeGrillasMaximoALoAncho = Math.floor((window.innerWidth - 16 * 4) / (7 * 16))
-      const numerosDeGrillasMaximoALoAlto = Math.floor(window.innerHeight / (7.5 * 16))
-
-      const numeroDeGrillasMaximas = numerosDeGrillasMaximoALoAncho * numerosDeGrillasMaximoALoAlto
-
-      const newarr: typesOfSlots[] = []
-
-      for (let i = 0; i < numeroDeGrillasMaximas; i++) {
-        const id = nanoid()
-        // console.log(id)
-        if (i !== 0) newarr.push({ type: 'empty', id })
-        else newarr.push({ id, type: 'buttonAdd' })
-      }
-
-      setIcons(newarr)
+    if (icons.length) {
+      localStorage.setItem('info', JSON.stringify(icons))
     }
-  }, [])
+    console.log('hola desde el effect de icons', icons)
+  }, [icons])
 
   return (
     <main className={styles.containerApp}>
@@ -43,11 +38,14 @@ const ContainerApp = () => {
           switch (icon.type) {
             case 'empty':
               return <EmptySlot key={icon.id} id={icon.id} setIcons={setIcons} icons={icons} />
-            case 'buttonAdd':
+            case 'folder':
               return (
-                <AddSlot
+                <FolderSlot
                   key={icon.id}
-                  openPortal={() => setModalShortcut({ boolean: true, id: icon.id })}
+                  id={icon.id}
+                  title={icon.title}
+                  icons={icons}
+                  setIcons={setIcons}
                 />
               )
             case 'shortcut':
@@ -56,8 +54,9 @@ const ContainerApp = () => {
                   key={icon.id}
                   id={icon.id}
                   title={icon.title}
-                  description={icon.description}
                   link={icon.link}
+                  icons={icons}
+                  setIcons={setIcons}
                 />
               )
             default:
@@ -66,17 +65,26 @@ const ContainerApp = () => {
         })}
       </section>
       <nav className={styles.navSection}>
-        <DeleteIcon className={styles.deleteIcon} />
-        {/* <AddIcon onClick={() => setModalShortcut({ boolean: true})}/> */}
+        {/* <DeleteIcon className={styles.deleteIcon} /> */}
+        <AddSlot openPortal={() => setModalSelector(true)} />
         <ConfigurationIcon className={styles.configIcon} />
       </nav>
-      {modalShortcut.boolean && (
+      {modalSelector && (
+        <PortalSelector
+          closePortalSelector={() => setModalSelector(false)}
+          openPortalShortcut={() => setModalShortcut(true)}
+          openPortalFolder={() => setModalFolder(true)}
+        />
+      )}
+      {modalShortcut && (
         <PortalShortcut
           setIcons={setIcons}
           icons={icons}
-          modalShortcut={modalShortcut}
-          closePortal={() => setModalShortcut({ boolean: false, id: '' })}
+          closePortal={() => setModalShortcut(false)}
         />
+      )}
+      {modalFolder && (
+        <PortalFolder closePortal={() => setModalFolder(false)} icons={icons} setIcons={setIcons} />
       )}
     </main>
   )

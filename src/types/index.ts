@@ -1,19 +1,25 @@
 export interface empty {
-  id: string
   type: 'empty'
-}
-
-export interface buttonAdd {
   id: string
-  type: 'buttonAdd'
 }
-
 export interface shortcut {
   id: string
   type: 'shortcut'
   title: string
-  description: string
   link: string
 }
+export interface note {
+  id: string
+  type: 'note'
+  title: string
+  text: string
+}
+export type slotsInFolder = empty | shortcut | note
+export interface folder {
+  id: string
+  type: 'folder'
+  title: string
+  slots: slotsInFolder[]
+}
 
-export type typesOfSlots = empty | buttonAdd | shortcut
+export type typesOfSlots = empty | shortcut | folder | note

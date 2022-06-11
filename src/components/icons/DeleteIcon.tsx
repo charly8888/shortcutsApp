@@ -1,7 +1,8 @@
-function DeleteIcon({ className }) {
+import { PropsWithChildren } from 'react'
+type props = { className?: string }
+function DeleteIcon({ className }: PropsWithChildren<props>) {
   return (
     <svg
-      className='h-6 w-6'
       fill='none'
       viewBox='0 0 24 24'
       stroke='currentColor'

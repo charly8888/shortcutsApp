@@ -1,19 +1,19 @@
 import React, { FC } from 'react'
 import { deleteItem } from '../lib/helpers'
-import { typesOfSlots } from '../types'
+import { typesOfSlots } from '../types/index'
+import styles from './FolderSlot.module.scss'
 import stylesGenerals from './GeneralStylesForGridItems.module.scss'
 import CrossIcon from './icons/CrossIcon'
-import styles from './ShortcutSlot.module.scss'
+import FolderIcon from './icons/FolderIcon'
 
 interface props {
   id: string
   title: string
   icons: typesOfSlots[]
   setIcons: React.Dispatch<React.SetStateAction<typesOfSlots[]>>
-  link: string
 }
 
-const ShortcutSlot: FC<props> = ({ id, title, link, icons, setIcons }) => {
+const FolderSlot: FC<props> = ({ id, title, icons, setIcons }) => {
   return (
     <div
       className={` ${stylesGenerals.sizeGrid} ${styles.gridItem}`}
@@ -21,15 +21,16 @@ const ShortcutSlot: FC<props> = ({ id, title, link, icons, setIcons }) => {
       onDragStart={(e) => {
         const target = e.target as HTMLDivElement
         e.dataTransfer.setData('text/plan', target.id)
-        console.log(e.dataTransfer)
+        // console.log(e.dataTransfer)
       }}
       id={id}
     >
       <div className={styles.containerContent}>
-        <img src={`${link}/favicon.png`} />
-        <a href={link} target='_blank' rel='noreferrer' draggable={false}></a>
+        <FolderIcon />
+        {/* <a href={link} target='_blank' rel='noreferrer' draggable={false}></a> */}
       </div>
       <p>{title}</p>
+
       <button
         className={styles.closeButton}
         onClick={() => {
@@ -42,4 +43,4 @@ const ShortcutSlot: FC<props> = ({ id, title, link, icons, setIcons }) => {
     </div>
   )
 }
-export default ShortcutSlot
+export default FolderSlot

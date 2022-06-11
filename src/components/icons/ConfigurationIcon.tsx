@@ -1,4 +1,6 @@
-function ConfigurationIcon({ className }) {
+import { PropsWithChildren } from 'react'
+type props = { className?: string }
+function ConfigurationIcon({ className }: PropsWithChildren<props>) {
   return (
     <svg className={className} viewBox='0 0 20 20' fill='currentColor'>
       <path

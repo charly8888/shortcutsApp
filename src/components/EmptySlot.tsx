@@ -1,8 +1,13 @@
-import { useState } from 'react'
+import React, { FC, useState } from 'react'
+import { typesOfSlots } from '../types'
 import styles from './EmptySlot.module.scss'
 import stylesGenerals from './GeneralStylesForGridItems.module.scss'
-
-const EmptySlot = ({ id, setIcons, icons }) => {
+interface props {
+  id: string
+  icons: typesOfSlots[]
+  setIcons: React.Dispatch<React.SetStateAction<typesOfSlots[]>>
+}
+const EmptySlot: FC<props> = ({ id, setIcons, icons }) => {
   const [classOver, setClassOver] = useState(false)
   return (
     <div
@@ -15,12 +20,14 @@ const EmptySlot = ({ id, setIcons, icons }) => {
         // console.log("entra")
       }}
       onDragLeave={() => setClassOver(false)}
-      
       id={id}
       onDrop={(e) => {
-         setClassOver(false)
+        setClassOver(false)
+
+        const target = e.target as HTMLDivElement
+
         const getDataId = e.dataTransfer.getData('text/plan')
-        const getCurrentTargetId = e.target.id
+        const getCurrentTargetId = target.id
 
         const newIcons = [...icons]
 
@@ -30,8 +37,10 @@ const EmptySlot = ({ id, setIcons, icons }) => {
         const DragElementIndex = newIcons.findIndex((e) => e.id === getDataId)
         const DropElementIndex = newIcons.findIndex((e) => e.id === getCurrentTargetId)
 
-        newIcons[DropElementIndex] = DragElement
-        newIcons[DragElementIndex] = DropElement
+        if (DragElement && DropElement) {
+          newIcons[DropElementIndex] = DragElement
+          newIcons[DragElementIndex] = DropElement
+        }
 
         setIcons(newIcons)
       }}

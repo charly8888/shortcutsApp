@@ -1,18 +1,20 @@
 import { FC, SetStateAction, useState } from 'react'
 import { createPortal } from 'react-dom'
-import { addNewShortcut } from '../../lib/helpers'
-import { typesOfSlots } from '../../types'
+import { addNewFolder } from '../../lib/helpers'
+import { typesOfSlots } from '../../types/index'
 import CrossIcon from '../icons/CrossIcon'
 import styles from './PortalShortcut.module.scss'
+
 interface props {
-  closePortal: Function
+  closePortal: () => void
   setIcons: (value: SetStateAction<typesOfSlots[]>) => void
   icons: typesOfSlots[]
 }
-const PortalShortcut: FC<props> = ({ closePortal, setIcons, icons }) => {
-  // console.log(modalShortcut)
-  const [information, setInformation] = useState({ link: '', description: '', title: '' })
 
+const PortalFolder: FC<props> = ({ closePortal, setIcons, icons }) => {
+  // console.log(modalShortcut)
+  const [information, setInformation] = useState({ description: '', title: '' })
+  const modalContainer = document.getElementById('modal-container-of-shortcut-info') as HTMLElement
   return createPortal(
     <main className={styles.containerGlobal}>
       <form
@@ -21,11 +23,11 @@ const PortalShortcut: FC<props> = ({ closePortal, setIcons, icons }) => {
         onSubmit={(e) => {
           e.preventDefault()
           console.log(e)
-          addNewShortcut(setIcons, icons, information)
+          addNewFolder(setIcons, icons, information)
           closePortal()
         }}
       >
-        <button onClick={() => closePortal()} className={styles.buttonClose}>
+        <button onClick={closePortal} className={styles.buttonClose}>
           <CrossIcon className={styles.crossIcon} />
         </button>
         <p>Title</p>
@@ -40,17 +42,12 @@ const PortalShortcut: FC<props> = ({ closePortal, setIcons, icons }) => {
           value={information.description}
           onChange={(e) => setInformation({ ...information, description: e.target.value })}
         />
-        <p>Link</p>
-        <input
-          name='link'
-          value={information.link}
-          onChange={(e) => setInformation({ ...information, link: e.target.value })}
-        />
+
         <button className={styles.buttonSave}>Save</button>
       </form>
     </main>,
-    document.getElementById('modal-container-of-shortcut-info') as HTMLElement
+    modalContainer
   )
 }
 
-export default PortalShortcut
+export default PortalFolder
