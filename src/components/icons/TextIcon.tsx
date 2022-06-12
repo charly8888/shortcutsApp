@@ -1,11 +1,7 @@
 import { PropsWithChildren } from 'react'
 type props = { className?: string; colorBack?: string; colorFront?: string }
 
-function TextIcon({
-  className,
-  colorBack = '#1976D2',
-  colorFront = '#90CAF9',
-}: PropsWithChildren<props>) {
+function TextIcon({ className, colorBack, colorFront }: PropsWithChildren<props>) {
   return (
     <svg viewBox='0 0 48 48' width='100%' className={className}>
       <path fill={colorFront} d='M40 45L8 45 8 3 30 3 40 13z' />

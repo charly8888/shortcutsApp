@@ -24,9 +24,11 @@ const FolderEditPortal: FC<props> = ({ closePortal, icons, modalEdit, setIcons }
   return (
     <section className={styles.containerApp}>
       <main className={styles.containerEditSection}>
+        
         <button onClick={() => closePortal()} className={styles.buttonClose}>
           <CrossIcon className={styles.crossIcon} />
         </button>
+
         <form
           onSubmit={() => {
             closePortal()

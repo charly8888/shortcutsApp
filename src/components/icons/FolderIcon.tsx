@@ -6,11 +6,7 @@ interface Props {
   colorFront?: string
 }
 
-function FolderIcon({
-  className,
-  colorBack = '#FFA000',
-  colorFront = '#FFCA28',
-}: PropsWithChildren<Props>) {
+function FolderIcon({ className, colorBack, colorFront }: PropsWithChildren<Props>) {
   return (
     <svg viewBox='0 0 48 48' width='100%' className={className}>
       <path fill={colorBack} d='M40,12H22l-4-4H8c-2.2,0-4,1.8-4,4v8h40v-4C44,13.8,42.2,12,40,12z' />
