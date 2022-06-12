@@ -18,7 +18,12 @@ const ContainerApp = () => {
   const [modalShortcut, setModalShortcut] = useState(false)
   const [modalSelector, setModalSelector] = useState(false)
   const [modalFolder, setModalFolder] = useState(false)
-  const [modalText, setModalText] = useState(false)
+  const [modalText, setModalText] = useState({
+    boolean: false,
+    title: '',
+    description: '',
+    id: '',
+  })
 
   useEffect(() => {
     const items = JSON.parse(localStorage.getItem('info') || '[]')
@@ -49,6 +54,10 @@ const ContainerApp = () => {
                   title={icon.title}
                   icons={icons}
                   setIcons={setIcons}
+                  openPortal={() => {
+                    setModalText({ boolean: true, title: '', description: '', id: '' })
+                  }}
+                  setModalText={setModalText}
                 />
               )
             case 'folder':
@@ -87,7 +96,7 @@ const ContainerApp = () => {
           closePortalSelector={() => setModalSelector(false)}
           openPortalShortcut={() => setModalShortcut(true)}
           openPortalFolder={() => setModalFolder(true)}
-          openPortalText={() => setModalText(true)}
+          openPortalText={() => setModalText({ boolean: true, title: '', description: '', id: '' })}
         />
       )}
       {modalShortcut && (
@@ -100,8 +109,13 @@ const ContainerApp = () => {
       {modalFolder && (
         <PortalFolder closePortal={() => setModalFolder(false)} icons={icons} setIcons={setIcons} />
       )}
-      {modalText && (
-        <PortalText closePortal={() => setModalText(false)} icons={icons} setIcons={setIcons} />
+      {modalText.boolean && (
+        <PortalText
+          closePortal={() => setModalText({ boolean: false, title: '', description: '', id: '' })}
+          icons={icons}
+          setIcons={setIcons}
+          modalText={modalText}
+        />
       )}
     </main>
   )

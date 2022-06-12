@@ -6,20 +6,30 @@ export function addNewText(
   information: {
     title: string
     description: string
-  }
+  },
+  id: string
 ) {
-  const newIcons = [...icons]
-
-  const indexOfFirstEmpty = newIcons.findIndex((e) => e.type === 'empty')
-
-  const text = {
-    id: newIcons[indexOfFirstEmpty].id,
-    type: 'text',
-    text: information.description,
-    title: information.title,
-  } as text
-
-  newIcons[indexOfFirstEmpty] = text
-
-  setIcons(newIcons)
+  if (id === '') {
+    const newIcons = [...icons]
+    const indexOfFirstEmpty = newIcons.findIndex((e) => e.type === 'empty')
+    const text = {
+      id: newIcons[indexOfFirstEmpty].id,
+      type: 'text',
+      text: information.description,
+      title: information.title,
+    } as text
+    newIcons[indexOfFirstEmpty] = text
+    setIcons(newIcons)
+  } else {
+    const newIcons = [...icons]
+    const indexOfTextToEdit = newIcons.findIndex((e) => e.id === id)
+    const text = {
+      id,
+      type: 'text',
+      text: information.description,
+      title: information.title,
+    } as text
+    newIcons[indexOfTextToEdit] = text
+    setIcons(newIcons)
+  }
 }

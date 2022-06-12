@@ -9,11 +9,22 @@ interface props {
   closePortal: () => void
   setIcons: (value: SetStateAction<typesOfSlots[]>) => void
   icons: typesOfSlots[]
+  modalText: {
+    boolean: boolean
+    title: string
+    description: string
+    id: string
+  }
 }
 
-const PortalText: FC<props> = ({ closePortal, setIcons, icons }) => {
+const PortalText: FC<props> = ({ closePortal, setIcons, icons, modalText }) => {
   // console.log(modalShortcut)
-  const [information, setInformation] = useState({ description: '', title: '' })
+
+  const { description, title, id } = modalText
+  console.log('hola desde el portal', modalText)
+
+  const [information, setInformation] = useState({ description, title })
+
   const modalContainer = document.getElementById('modal-text') as HTMLElement
   return createPortal(
     <main className={styles.containerGlobal}>
@@ -23,7 +34,7 @@ const PortalText: FC<props> = ({ closePortal, setIcons, icons }) => {
         onSubmit={(e) => {
           e.preventDefault()
           console.log(e)
-          addNewText(setIcons, icons, information)
+          addNewText(setIcons, icons, information, id)
           closePortal()
         }}
       >
