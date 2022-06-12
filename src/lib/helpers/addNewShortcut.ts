@@ -21,6 +21,7 @@ export function addNewShortcut(
     link: information.link,
     description: information.description,
     title: information.title,
+    
   } as shortcut
 
   setIcons(newIcons)

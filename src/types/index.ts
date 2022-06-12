@@ -13,6 +13,8 @@ export interface text {
   type: 'text'
   title: string
   text: string
+  primaryColor?: string
+  secondaryColor?: string
 }
 export type slotsInFolder = empty | shortcut | text
 export interface folder {
@@ -20,6 +22,8 @@ export interface folder {
   type: 'folder'
   title: string
   slots: slotsInFolder[]
+  primaryColor?: string
+  secondaryColor?: string
 }
 
 export type typesOfSlots = empty | shortcut | folder | text

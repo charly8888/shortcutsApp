@@ -28,6 +28,8 @@ export function addNewText(
       type: 'text',
       text: information.description,
       title: information.title,
+      primaryColor: '#90caf9',
+      secondaryColor: '#1976d2',
     } as text
     newIcons[indexOfTextToEdit] = text
     setIcons(newIcons)

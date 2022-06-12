@@ -1,8 +1,9 @@
 import React, { FC } from 'react'
 import { deleteItem } from '../../lib/helpers'
 import { typesOfSlots } from '../../types'
-import stylesGenerals from './GeneralStylesForGridItems.module.scss'
 import CrossIcon from '../icons/CrossIcon'
+import EditIcon from '../icons/EditIcon'
+import stylesGenerals from './GeneralStylesForGridItems.module.scss'
 import styles from './ShortcutSlot.module.scss'
 
 interface props {
@@ -30,6 +31,15 @@ const ShortcutSlot: FC<props> = ({ id, title, link, icons, setIcons }) => {
         <a href={link} target='_blank' rel='noreferrer' draggable={false}></a>
       </div>
       <p>{title}</p>
+      <button
+        className={`${styles.closeButton} ${styles.editButton}`}
+        onClick={() => {
+          deleteItem(setIcons, icons, id)
+          console.log('hola')
+        }}
+      >
+        <EditIcon className={styles.EditIcon} />
+      </button>
       <button
         className={styles.closeButton}
         onClick={() => {

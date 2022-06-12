@@ -25,6 +25,9 @@
       opacity: 1;
     }
   }
+  &:hover > .editButton {
+    background-color: var(--color-lightgray);
+  }
 }
 .containerContent {
   width: 80%;
@@ -43,4 +46,7 @@
   img {
     width: 100%;
   }
+}
+.editButton {
+  top: 1.2rem;
 }

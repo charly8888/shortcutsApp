@@ -4,6 +4,7 @@ import { setGridFirstTime } from '../lib/helpers'
 import AddSlot from './AddSlot'
 import styles from './ContainerApp.module.scss'
 import ConfigurationIcon from './icons/ConfigurationIcon'
+import FolderEditPortal from './portals/edit-portals/FolderEditPortal'
 import PortalFolder from './portals/PortalFolder'
 import PortalSelector from './portals/PortalSelector'
 import PortalShortcut from './portals/PortalShortcut'
@@ -22,6 +23,10 @@ const ContainerApp = () => {
     boolean: false,
     title: '',
     description: '',
+    id: '',
+  })
+  const [modalEdit, setModalEdit] = useState({
+    boolean: false,
     id: '',
   })
 
@@ -58,6 +63,11 @@ const ContainerApp = () => {
                     setModalText({ boolean: true, title: '', description: '', id: '' })
                   }}
                   setModalText={setModalText}
+                  openPortalEdit={() => {
+                    setModalEdit({ boolean: true, id: icon.id })
+                  }}
+                  primaryColor={icon.primaryColor}
+                  secondaryColor={icon.secondaryColor}
                 />
               )
             case 'folder':
@@ -68,6 +78,11 @@ const ContainerApp = () => {
                   title={icon.title}
                   icons={icons}
                   setIcons={setIcons}
+                  openPortal={() => {
+                    setModalEdit({ boolean: true, id: icon.id })
+                  }}
+                  primaryColor={icon.primaryColor}
+                  secondaryColor={icon.secondaryColor}
                 />
               )
             case 'shortcut':
@@ -115,6 +130,14 @@ const ContainerApp = () => {
           icons={icons}
           setIcons={setIcons}
           modalText={modalText}
+        />
+      )}
+      {modalEdit.boolean && (
+        <FolderEditPortal
+          closePortal={() => setModalEdit({ boolean: false, id: '' })}
+          icons={icons}
+          setIcons={setIcons}
+          modalEdit={modalEdit}
         />
       )}
     </main>

@@ -1,20 +1,31 @@
 import React, { FC } from 'react'
 import { deleteItem } from '../../lib/helpers'
 import { typesOfSlots } from '../../types/index'
-import styles from './FolderSlot.module.scss'
-import stylesGenerals from './GeneralStylesForGridItems.module.scss'
 import CrossIcon from '../icons/CrossIcon'
 import EditIcon from '../icons/EditIcon'
 import FolderIcon from '../icons/FolderIcon'
+import styles from './FolderSlot.module.scss'
+import stylesGenerals from './GeneralStylesForGridItems.module.scss'
 
 interface props {
   id: string
   title: string
   icons: typesOfSlots[]
   setIcons: React.Dispatch<React.SetStateAction<typesOfSlots[]>>
+  openPortal: Function
+  primaryColor: string
+  secondaryColor: string
 }
 
-const FolderSlot: FC<props> = ({ id, title, icons, setIcons }) => {
+const FolderSlot: FC<props> = ({
+  id,
+  title,
+  icons,
+  setIcons,
+  openPortal,
+  secondaryColor,
+  primaryColor,
+}) => {
   return (
     <div
       className={` ${stylesGenerals.sizeGrid} ${styles.gridItem}`}
@@ -27,15 +38,14 @@ const FolderSlot: FC<props> = ({ id, title, icons, setIcons }) => {
       id={id}
     >
       <div className={styles.containerContent}>
-        <FolderIcon />
+        <FolderIcon colorBack={secondaryColor} colorFront={primaryColor} />
         {/* <a href={link} target='_blank' rel='noreferrer' draggable={false}></a> */}
       </div>
       <p>{title}</p>
       <button
         className={`${styles.closeButton} ${styles.editButton}`}
         onClick={() => {
-          deleteItem(setIcons, icons, id)
-          console.log('hola')
+          openPortal()
         }}
       >
         <EditIcon className={styles.EditIcon} />

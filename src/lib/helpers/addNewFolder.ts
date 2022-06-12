@@ -8,7 +8,6 @@ export function addNewFolder(
   }
 ) {
   const newIcons = [...icons]
-
   const indexOfFirstEmpty = newIcons.findIndex((e) => e.type === 'empty')
 
   const folder: folder = {
@@ -16,6 +15,8 @@ export function addNewFolder(
     type: 'folder',
     slots: [],
     title: information.title,
+    primaryColor: '#ffca28',
+    secondaryColor: '#ffa000',
   } as folder
 
   newIcons[indexOfFirstEmpty] = folder
