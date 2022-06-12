@@ -1,5 +1,5 @@
 import React, { FC, useState } from 'react'
-import { typesOfSlots } from '../types'
+import { typesOfSlots } from '../../types'
 import styles from './EmptySlot.module.scss'
 import stylesGenerals from './GeneralStylesForGridItems.module.scss'
 interface props {

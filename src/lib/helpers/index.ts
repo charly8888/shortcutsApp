@@ -1,4 +1,5 @@
 export { addNewFolder } from './addNewFolder'
 export { addNewShortcut } from './addNewShortcut'
+export { addNewText } from './addNewText'
 export { deleteItem } from './deleteItem'
 export { setGridFirstTime } from './setGridFirstTime'

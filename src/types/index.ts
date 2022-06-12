@@ -8,13 +8,13 @@ export interface shortcut {
   title: string
   link: string
 }
-export interface note {
+export interface text {
   id: string
-  type: 'note'
+  type: 'text'
   title: string
   text: string
 }
-export type slotsInFolder = empty | shortcut | note
+export type slotsInFolder = empty | shortcut | text
 export interface folder {
   id: string
   type: 'folder'
@@ -22,4 +22,4 @@ export interface folder {
   slots: slotsInFolder[]
 }
 
-export type typesOfSlots = empty | shortcut | folder | note
+export type typesOfSlots = empty | shortcut | folder | text

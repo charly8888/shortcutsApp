@@ -7,12 +7,14 @@ interface props {
   closePortalSelector: Function
   openPortalShortcut: Function
   openPortalFolder: Function
+  openPortalText: Function
 }
 
 const PortalSelector: FC<props> = ({
   closePortalSelector,
   openPortalShortcut,
   openPortalFolder,
+  openPortalText,
 }) => {
   // console.log(modalShortcut)
 
@@ -33,6 +35,14 @@ const PortalSelector: FC<props> = ({
         }}
       >
         Add folder
+      </button>
+      <button
+        onClick={() => {
+          closePortalSelector()
+          openPortalText()
+        }}
+      >
+        Add text
       </button>
       <button onClick={() => closePortalSelector()} className={styles.buttonClose}>
         <CrossIcon className={styles.crossIcon} />

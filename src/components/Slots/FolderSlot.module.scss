@@ -12,9 +12,6 @@
   align-items: center;
   // transform: translate(30%);
 }
-.CrossIcon {
-  color: rgb(47, 48, 48);
-}
 .gridItem {
   &:hover > .closeButton {
     visibility: visible;
@@ -24,6 +21,9 @@
       // background-color: red;
       opacity: 1;
     }
+  }
+  &:hover > .editButton {
+    background-color: var(--color-lightgray);
   }
 }
 .containerContent {
@@ -42,4 +42,7 @@
   img {
     width: 100%;
   }
+}
+.editButton {
+  left: 0;
 }
