@@ -51,7 +51,7 @@ const TextSlot: FC<props> = ({
         <TextIcon colorBack={secondaryColor} colorFront={primaryColor} />
         {/* <a href={link} target='_blank' rel='noreferrer' draggable={false}></a> */}
       </div>
-      <p>{title}</p>
+      <p >{title}</p>
       <button
         className={`${styles.closeButton} ${styles.editButton}`}
         onClick={() => {
