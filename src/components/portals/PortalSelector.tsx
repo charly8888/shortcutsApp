@@ -1,13 +1,17 @@
 import { FC } from 'react'
 import { createPortal } from 'react-dom'
 import CrossIcon from '../icons/CrossIcon'
-import styles from './PortalShortcut.module.scss'
+import FolderIcon from '../icons/FolderIcon'
+import LinkIcon from '../icons/LinkIcon'
+import TextIcon from '../icons/TextIcon'
+import styles from './PortalSelector.module.scss'
 
 interface props {
   closePortalSelector: Function
   openPortalShortcut: Function
   openPortalFolder: Function
   openPortalText: Function
+  isFolder: boolean
 }
 
 const PortalSelector: FC<props> = ({
@@ -15,38 +19,47 @@ const PortalSelector: FC<props> = ({
   openPortalShortcut,
   openPortalFolder,
   openPortalText,
+  isFolder,
 }) => {
   // console.log(modalShortcut)
 
   return createPortal(
     <main className={styles.containerGlobal}>
-      <button
-        onClick={() => {
-          closePortalSelector()
-          openPortalShortcut()
-        }}
-      >
-        Add shortcut
-      </button>
-      <button
-        onClick={() => {
-          closePortalSelector()
-          openPortalFolder()
-        }}
-      >
-        Add folder
-      </button>
-      <button
-        onClick={() => {
-          closePortalSelector()
-          openPortalText()
-        }}
-      >
-        Add text
-      </button>
-      <button onClick={() => closePortalSelector()} className={styles.buttonClose}>
-        <CrossIcon className={styles.crossIcon} />
-      </button>
+      <section className={styles.containerSetInfo}>
+        <button
+          onClick={() => {
+            closePortalSelector()
+            openPortalShortcut()
+          }}
+          className={styles.buttonIcon}
+        >
+          <LinkIcon />
+        </button>
+        <button
+          onClick={() => {
+            closePortalSelector()
+            openPortalText()
+          }}
+          className={styles.buttonIcon}
+        >
+          <TextIcon  colorFront={'#90caf9'}
+        colorBack={'#1976d2'}/>
+        </button>
+        {!isFolder && (
+          <button
+            onClick={() => {
+              closePortalSelector()
+              openPortalFolder()
+            }}
+            className={styles.buttonIcon}
+          >
+            <FolderIcon colorFront={'#ffca28'} colorBack={'#ffa000'} />
+          </button>
+        )}
+        <button onClick={() => closePortalSelector()} className={styles.closeButton}>
+          <CrossIcon className={styles.crossIcon} />
+        </button>
+      </section>
     </main>,
     document.getElementById('modal-selector') as HTMLElement
   )

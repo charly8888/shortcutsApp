@@ -17,6 +17,7 @@ interface props {
   openPortalEdit: Function
   primaryColor: string
   secondaryColor: string
+  idFolder?: string
 }
 
 const TextSlot: FC<props> = ({
@@ -29,14 +30,15 @@ const TextSlot: FC<props> = ({
   openPortalEdit,
   secondaryColor,
   primaryColor,
+  idFolder
 }) => {
   return (
     <div
       className={` ${stylesGenerals.sizeGrid} ${styles.gridItem}`}
       draggable
       onDoubleClick={() => {
-        console.log(id, title, icons)
-        openPortalAndUpdateText(setModalText, id, icons)
+        console.log("console del doble click",id, title, icons)
+        openPortalAndUpdateText(setModalText, id, icons, idFolder )
       }}
       onDragStart={(e) => {
         const target = e.target as HTMLDivElement

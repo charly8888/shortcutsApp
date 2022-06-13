@@ -1,5 +1,6 @@
 import { PropsWithChildren } from 'react'
 type props = { className?: string }
+
 function EditIcon({ className }: PropsWithChildren<props>) {
   return (
     <svg viewBox='0 0 20 20' fill='currentColor' className={className}>

@@ -6,6 +6,7 @@ import styles from './ContainerApp.module.scss'
 import ConfigurationIcon from './icons/ConfigurationIcon'
 import FolderEditPortal from './portals/edit-portals/FolderEditPortal'
 import PortalFolder from './portals/PortalFolder'
+import PortalOpenedFolder from './portals/PortalOpenedFolder'
 import PortalSelector from './portals/PortalSelector'
 import PortalShortcut from './portals/PortalShortcut'
 import PortalText from './portals/PortalText'
@@ -21,14 +22,13 @@ const ContainerApp = () => {
   const [modalFolder, setModalFolder] = useState(false)
   const [modalText, setModalText] = useState({
     boolean: false,
-    title: '',
-    description: '',
     id: '',
   })
   const [modalEdit, setModalEdit] = useState({
     boolean: false,
     id: '',
   })
+  const [isFolderOpened, setIsFolderOpened] = useState({ boolean: false, id: '' })
 
   useEffect(() => {
     const items = JSON.parse(localStorage.getItem('info') || '[]')
@@ -60,7 +60,7 @@ const ContainerApp = () => {
                   icons={icons}
                   setIcons={setIcons}
                   openPortal={() => {
-                    setModalText({ boolean: true, title: '', description: '', id: '' })
+                    setModalText({ boolean: true, id: icon.id })
                   }}
                   setModalText={setModalText}
                   openPortalEdit={() => {
@@ -83,6 +83,7 @@ const ContainerApp = () => {
                   }}
                   primaryColor={icon.primaryColor}
                   secondaryColor={icon.secondaryColor}
+                  setIsFolderOpened={() => setIsFolderOpened({ boolean: true, id: icon.id })}
                 />
               )
             case 'shortcut':
@@ -111,7 +112,7 @@ const ContainerApp = () => {
           closePortalSelector={() => setModalSelector(false)}
           openPortalShortcut={() => setModalShortcut(true)}
           openPortalFolder={() => setModalFolder(true)}
-          openPortalText={() => setModalText({ boolean: true, title: '', description: '', id: '' })}
+          openPortalText={() => setModalText({ boolean: true, id: '' })}
         />
       )}
       {modalShortcut && (
@@ -126,7 +127,7 @@ const ContainerApp = () => {
       )}
       {modalText.boolean && (
         <PortalText
-          closePortal={() => setModalText({ boolean: false, title: '', description: '', id: '' })}
+          closePortal={() => setModalText({ boolean: false, id: '' })}
           icons={icons}
           setIcons={setIcons}
           modalText={modalText}
@@ -138,6 +139,14 @@ const ContainerApp = () => {
           icons={icons}
           setIcons={setIcons}
           modalEdit={modalEdit}
+        />
+      )}
+      {isFolderOpened.boolean && (
+        <PortalOpenedFolder
+          closePortal={() => setIsFolderOpened({ boolean: false, id: '' })}
+          idFolder={isFolderOpened.id}
+          icons={icons}
+          setIcons={setIcons}
         />
       )}
     </main>

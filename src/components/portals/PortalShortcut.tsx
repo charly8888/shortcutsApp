@@ -8,8 +8,9 @@ interface props {
   closePortal: Function
   setIcons: (value: SetStateAction<typesOfSlots[]>) => void
   icons: typesOfSlots[]
+  idFolder?: string
 }
-const PortalShortcut: FC<props> = ({ closePortal, setIcons, icons }) => {
+const PortalShortcut: FC<props> = ({ closePortal, setIcons, icons, idFolder }) => {
   // console.log(modalShortcut)
   const [information, setInformation] = useState({ link: '', description: '', title: '' })
 
@@ -21,7 +22,7 @@ const PortalShortcut: FC<props> = ({ closePortal, setIcons, icons }) => {
         onSubmit={(e) => {
           e.preventDefault()
           console.log(e)
-          addNewShortcut(setIcons, icons, information)
+          addNewShortcut(setIcons, icons, information, idFolder)
           closePortal()
         }}
       >
@@ -49,7 +50,7 @@ const PortalShortcut: FC<props> = ({ closePortal, setIcons, icons }) => {
         <button className={styles.buttonSave}>Save</button>
       </form>
     </main>,
-    document.getElementById('modal-container-of-shortcut-info') as HTMLElement
+    document.getElementById('modal-selector') as HTMLElement
   )
 }
 

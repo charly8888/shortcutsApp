@@ -15,6 +15,7 @@ interface props {
   openPortal: Function
   primaryColor: string
   secondaryColor: string
+  setIsFolderOpened: Function
 }
 
 const FolderSlot: FC<props> = ({
@@ -25,6 +26,7 @@ const FolderSlot: FC<props> = ({
   openPortal,
   secondaryColor,
   primaryColor,
+  setIsFolderOpened,
 }) => {
   return (
     <div
@@ -36,6 +38,7 @@ const FolderSlot: FC<props> = ({
         // console.log(e.dataTransfer)
       }}
       id={id}
+      onDoubleClick={() => setIsFolderOpened()}
     >
       <div className={styles.containerContent}>
         <FolderIcon colorBack={secondaryColor} colorFront={primaryColor} />

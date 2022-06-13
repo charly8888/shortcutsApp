@@ -1,0 +1,40 @@
+.containerGlobal {
+  width: calc(100% - 4rem);
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.containerSetInfo {
+  height: auto;
+  display: flex;
+  position: relative;
+  padding: 2rem;
+  background-color: #232327;
+  border-radius: var(--radius-sm);
+}
+.closeButton {
+  position: absolute;
+  top: 0.5rem;
+  left: 0.5rem;
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 50%;
+  border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: red;
+}
+.buttonIcon {
+  width: 10rem;
+  height: 10rem;
+  border: none;
+  background-color: transparent;
+  &:hover {
+    background-color: #37373a7a;;
+    border-radius: var(--radius-sm);
+  }
+}

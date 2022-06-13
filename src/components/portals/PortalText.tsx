@@ -15,17 +15,19 @@ interface props {
     description: string
     id: string
   }
+  idFolder?: string
 }
 
-const PortalText: FC<props> = ({ closePortal, setIcons, icons, modalText }) => {
+const PortalText: FC<props> = ({ closePortal, setIcons, icons, modalText, idFolder }) => {
   // console.log(modalShortcut)
 
   const { description, title, id } = modalText
   console.log('hola desde el portal', modalText)
 
   const [information, setInformation] = useState({ description, title })
-
-  const modalContainer = document.getElementById('modal-text') as HTMLElement
+  
+console.log("information", information)
+  const modalContainer = document.getElementById('modal-selector') as HTMLElement
   return createPortal(
     <main className={styles.containerGlobal}>
       <form
@@ -33,8 +35,8 @@ const PortalText: FC<props> = ({ closePortal, setIcons, icons, modalText }) => {
         onClick={(e) => e.stopPropagation()}
         onSubmit={(e) => {
           e.preventDefault()
-          console.log(e)
-          addNewText(setIcons, icons, information, id)
+          console.log(id)
+          addNewText(setIcons, icons, information, id, idFolder)
           closePortal()
         }}
       >
