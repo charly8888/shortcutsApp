@@ -5,7 +5,7 @@ export function addNewFolder(
   icons: typesOfSlots[],
   information: {
     title: string
-  }
+  },
 ) {
   const newIcons = [...icons]
   const indexOfFirstEmpty = newIcons.findIndex((e) => e.type === 'empty')

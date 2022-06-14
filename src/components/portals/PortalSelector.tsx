@@ -1,9 +1,9 @@
 import { FC } from 'react'
 import { createPortal } from 'react-dom'
-import CrossIcon from '../icons/CrossIcon'
 import FolderIcon from '../icons/FolderIcon'
 import LinkIcon from '../icons/LinkIcon'
 import TextIcon from '../icons/TextIcon'
+import ButtonClose from '../UIComponents/ButtonClose'
 import styles from './PortalSelector.module.scss'
 
 interface props {
@@ -42,8 +42,7 @@ const PortalSelector: FC<props> = ({
           }}
           className={styles.buttonIcon}
         >
-          <TextIcon  colorFront={'#90caf9'}
-        colorBack={'#1976d2'}/>
+          <TextIcon colorFront={'#90caf9'} colorBack={'#1976d2'} />
         </button>
         {!isFolder && (
           <button
@@ -56,9 +55,7 @@ const PortalSelector: FC<props> = ({
             <FolderIcon colorFront={'#ffca28'} colorBack={'#ffa000'} />
           </button>
         )}
-        <button onClick={() => closePortalSelector()} className={styles.closeButton}>
-          <CrossIcon className={styles.crossIcon} />
-        </button>
+        <ButtonClose onClick={() => closePortalSelector()} />
       </section>
     </main>,
     document.getElementById('modal-selector') as HTMLElement

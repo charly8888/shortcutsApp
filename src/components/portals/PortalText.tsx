@@ -2,8 +2,9 @@ import { FC, SetStateAction, useState } from 'react'
 import { createPortal } from 'react-dom'
 import { addNewText } from '../../lib/helpers/addNewText'
 import { typesOfSlots } from '../../types/index'
-import CrossIcon from '../icons/CrossIcon'
-import styles from './PortalShortcut.module.scss'
+import ButtonClose from '../UIComponents/ButtonClose'
+import ButtonSave from '../UIComponents/ButtonSave'
+import styles from './PortalText.module.scss'
 
 interface props {
   closePortal: () => void
@@ -25,8 +26,8 @@ const PortalText: FC<props> = ({ closePortal, setIcons, icons, modalText, idFold
   console.log('hola desde el portal', modalText)
 
   const [information, setInformation] = useState({ description, title })
-  
-console.log("information", information)
+
+  console.log('information', information)
   const modalContainer = document.getElementById('modal-selector') as HTMLElement
   return createPortal(
     <main className={styles.containerGlobal}>
@@ -40,23 +41,14 @@ console.log("information", information)
           closePortal()
         }}
       >
-        <button onClick={closePortal} className={styles.buttonClose}>
-          <CrossIcon className={styles.crossIcon} />
-        </button>
-        <p>Title</p>
-        <input
-          name='title'
-          value={information.title}
-          onChange={(e) => setInformation({ ...information, title: e.target.value })}
-        />
-        <p>Description </p>
+        <p className={styles.title}>{information.title}</p>
         <textarea
           name='description'
           value={information.description}
           onChange={(e) => setInformation({ ...information, description: e.target.value })}
         />
-
-        <button className={styles.buttonSave}>Save</button>
+        <ButtonClose onClick={closePortal} widthAndHeightInREM={2} />
+        <ButtonSave widthAndHeightInREM={2} />
       </form>
     </main>,
     modalContainer

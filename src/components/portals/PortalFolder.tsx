@@ -3,6 +3,7 @@ import { createPortal } from 'react-dom'
 import { addNewFolder } from '../../lib/helpers'
 import { typesOfSlots } from '../../types/index'
 import CrossIcon from '../icons/CrossIcon'
+import ButtonClose from '../UIComponents/ButtonClose'
 import styles from './PortalShortcut.module.scss'
 
 interface props {
@@ -27,9 +28,8 @@ const PortalFolder: FC<props> = ({ closePortal, setIcons, icons }) => {
           closePortal()
         }}
       >
-        <button onClick={closePortal} className={styles.buttonClose}>
-          <CrossIcon className={styles.crossIcon} />
-        </button>
+        <ButtonClose onClick={closePortal}/>
+       
         <p>Title</p>
         <input
           name='title'
