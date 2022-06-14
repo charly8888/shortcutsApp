@@ -19,10 +19,14 @@ interface props {
 }
 
 const PortalOpenedFolder: FC<props> = ({ closePortal, icons, setIcons, idFolder }) => {
-  console.log(idFolder)
-  console.log(icons)
-
   const { slots, title }: { slots: slotsInFolder[] } = icons.find((e) => e.id === idFolder)
+
+  console.groupCollapsed('Modal opend folder')
+  console.log('icons', icons)
+  console.log('Id of folder', idFolder)
+  // console.log('')
+  console.groupEnd()
+  console.log('Slots of folder', slots)
 
   const [selectorOfItem, setSelectorOfItem] = useState(false)
   const [modalText, setModalText] = useState({
@@ -31,14 +35,12 @@ const PortalOpenedFolder: FC<props> = ({ closePortal, icons, setIcons, idFolder 
   })
   const [modalEdit, setModalEdit] = useState({
     boolean: false,
+    type: '',
     id: '',
+    isNew: false,
+    idFolder: '',
   })
   const [modalShortcut, setModalShortcut] = useState(false)
-  // console.groupCollapsed('Modal opene folder')
-  // console.log('Slots of folder', slots)
-  // console.log('Id of folder', idFolder)
-  // console.log('')
-  // console.groupEnd()
 
   return createPortal(
     <main className={styles.containerGlobal}>
@@ -60,7 +62,13 @@ const PortalOpenedFolder: FC<props> = ({ closePortal, icons, setIcons, idFolder 
                     }}
                     setModalText={setModalText}
                     openPortalEdit={() => {
-                      setModalEdit({ boolean: true, id: icon.id })
+                      setModalEdit({
+                        boolean: true,
+                        id: icon.id,
+                        type: 'text',
+                        isNew: false,
+                        idFolder,
+                      })
                     }}
                     primaryColor={icon.primaryColor}
                     secondaryColor={icon.secondaryColor}
@@ -95,8 +103,10 @@ const PortalOpenedFolder: FC<props> = ({ closePortal, icons, setIcons, idFolder 
       {selectorOfItem && (
         <PortalSelector
           closePortalSelector={() => setSelectorOfItem(false)}
+          openPortalText={() =>
+            setModalEdit({ boolean: true, id: '', type: 'text', isNew: true, idFolder })
+          }
           openPortalShortcut={() => setModalShortcut(true)}
-          openPortalText={() => setModalText({ boolean: true, id: '' })}
           isFolder={true}
         />
       )}
@@ -119,8 +129,8 @@ const PortalOpenedFolder: FC<props> = ({ closePortal, icons, setIcons, idFolder 
       )}
       {modalEdit.boolean && (
         <FolderEditPortal
-          closePortal={() => setModalEdit({ boolean: false, id: '' })}
-          icons={icons}
+          closePortal={() => setModalEdit({ boolean: false, id: idFolder, isNew: false, type: '' })}
+          sendIcons={icons}
           setIcons={setIcons}
           modalEdit={modalEdit}
         />

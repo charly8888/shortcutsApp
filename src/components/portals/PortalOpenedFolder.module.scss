@@ -46,9 +46,12 @@
 .wrapperItems {
   display: flex;
   flex-wrap: wrap;
+  // align-items: flex-start;
   border: 1px dashed greenyellow;
-  flex-grow: 1;
+  // flex-grow: 1;
+  height: 100%;
   position: relative;
+  overflow-y: scroll;
 }
 .containerButtonAdd {
   width: 3rem;

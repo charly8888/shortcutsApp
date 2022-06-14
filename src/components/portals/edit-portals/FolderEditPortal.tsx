@@ -1,3 +1,4 @@
+import { nanoid } from 'nanoid'
 import { FC, useState } from 'react'
 import { getRandomHexadecimalColor } from '../../../lib/helpers'
 import { updateFolderOrShortcutStyle } from '../../../lib/helpers/updateFolderOrShortcutStyle'
@@ -15,7 +16,7 @@ interface props {
   closePortal: Function
   sendIcons: typesOfSlots[]
   setIcons: Function
-  modalEdit: { boolean: boolean; id: string; type: string; isNew: boolean }
+  modalEdit: { boolean: boolean; id: string; type: string; isNew: boolean; idFolder: string }
 }
 const FolderEditPortal: FC<props> = ({ closePortal, sendIcons, modalEdit, setIcons }) => {
   const icons: typesOfSlots[] = [...sendIcons]
@@ -26,20 +27,41 @@ const FolderEditPortal: FC<props> = ({ closePortal, sendIcons, modalEdit, setIco
     primaryColor: string
     secondaryColor: string
     title: string
+    slots: []
   }
 
   if (modalEdit.isNew) {
-    const emptyIndex = icons.findIndex((e) => e.type === 'empty')
+    if (modalEdit.idFolder) {
+      const id = nanoid()
 
-    itemProps = {
-      id: icons[emptyIndex].id,
-      type: modalEdit.type,
-      primaryColor: '',
-      secondaryColor: '',
-      title: '',
+      itemProps = {
+        id,
+        type: modalEdit.type,
+        primaryColor: '',
+        secondaryColor: '',
+        title: '',
+        slots: [],
+      }
+    } else {
+      const emptyIndex = icons.findIndex((e) => e.type === 'empty')
+
+      itemProps = {
+        id: icons[emptyIndex].id,
+        type: modalEdit.type,
+        primaryColor: '',
+        secondaryColor: '',
+        title: '',
+        slots: [],
+      }
     }
   } else {
-     itemProps = icons.find((e) => e.id === modalEdit.id)
+    if (modalEdit.idFolder) {
+      const targetFolder = icons.find((e) => e.id === modalEdit.idFolder)
+
+      itemProps = targetFolder.slots.find((e) => e.id === modalEdit.id)
+    } else {
+      itemProps = icons.find((e) => e.id === modalEdit.id)
+    }
   }
 
   const [itemNewProps, setItemNewProps] = useState(itemProps)
@@ -51,6 +73,7 @@ const FolderEditPortal: FC<props> = ({ closePortal, sendIcons, modalEdit, setIco
   console.log('modalEdit', modalEdit)
   console.log('itemProps', itemProps)
   console.log('itemNewProps', itemNewProps)
+  console.log('idFolder')
   console.groupEnd()
 
   const DEFAULT_COLORS = [
@@ -68,7 +91,6 @@ const FolderEditPortal: FC<props> = ({ closePortal, sendIcons, modalEdit, setIco
         <ButtonClose
           onClick={() => {
             closePortal()
-            // handleSetIconsForCancelOperation()
           }}
           widthAndHeightInREM={1.75}
           margin={'0.75rem'}
@@ -78,7 +100,12 @@ const FolderEditPortal: FC<props> = ({ closePortal, sendIcons, modalEdit, setIco
             onSubmit={(e) => {
               e.preventDefault()
               closePortal()
-              updateFolderOrShortcutStyle({ setIcons, icons, newIcon: itemNewProps })
+              updateFolderOrShortcutStyle({
+                setIcons,
+                icons,
+                newIcon: itemNewProps,
+                idFolder: modalEdit.idFolder,
+              })
             }}
           >
             <ButtonSave widthAndHeightInREM={1.75} margin={'.75rem'} />
