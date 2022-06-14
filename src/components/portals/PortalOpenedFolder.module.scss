@@ -32,19 +32,21 @@
   margin: 1rem;
   overflow: hidden;
   display: flex;
+  padding: 0 1.5rem 1.5rem 1.5rem;
   flex-direction: column;
 }
 .title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   color: #a0aec0;
-  text-align: center;
-  margin: 0.8rem;
   font-weight: 400;
+  height: 4rem;
 }
 .wrapperItems {
   display: flex;
   flex-wrap: wrap;
   border: 1px dashed greenyellow;
-  margin: 1rem;
   flex-grow: 1;
   position: relative;
 }

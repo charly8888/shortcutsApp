@@ -9,7 +9,7 @@ export const setGridFirstTime = () => {
 
   for (let i = 0; i < numeroDeGrillasMaximas; i++) {
     const id = nanoid()
-    newarr.push({ type: 'empty', id })
+    newarr.push({ type: 'empty', id, primaryColor: '', secondaryColor: '' })
   }
   return newarr
 }

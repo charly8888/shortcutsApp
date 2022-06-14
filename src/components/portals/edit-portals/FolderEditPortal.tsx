@@ -18,16 +18,28 @@ interface props {
   modalEdit: { boolean: boolean; id: string; type: string; isNew: boolean }
 }
 const FolderEditPortal: FC<props> = ({ closePortal, sendIcons, modalEdit, setIcons }) => {
-  const icons = [...sendIcons]
+  const icons: typesOfSlots[] = [...sendIcons]
 
-  let itemProps
+  let itemProps: {
+    id: string
+    type: string
+    primaryColor: string
+    secondaryColor: string
+    title: string
+  }
 
   if (modalEdit.isNew) {
     const emptyIndex = icons.findIndex((e) => e.type === 'empty')
 
-    itemProps = { id: icons[emptyIndex].id, type: modalEdit.type }
+    itemProps = {
+      id: icons[emptyIndex].id,
+      type: modalEdit.type,
+      primaryColor: '',
+      secondaryColor: '',
+      title: '',
+    }
   } else {
-    itemProps = icons.find((e) => e.id === modalEdit.id)
+     itemProps = icons.find((e) => e.id === modalEdit.id)
   }
 
   const [itemNewProps, setItemNewProps] = useState(itemProps)
@@ -56,7 +68,7 @@ const FolderEditPortal: FC<props> = ({ closePortal, sendIcons, modalEdit, setIco
         <ButtonClose
           onClick={() => {
             closePortal()
-            handleSetIconsForCancelOperation()
+            // handleSetIconsForCancelOperation()
           }}
           widthAndHeightInREM={1.75}
           margin={'0.75rem'}

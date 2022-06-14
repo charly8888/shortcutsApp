@@ -11,23 +11,26 @@ export function addNewShortcut(
     title: string
     id: string
   },
-  idFolder: string
+  idFolder?: string
 ) {
   const newIcons = [...icons]
 
   if (idFolder !== undefined) {
     const id = nanoid()
+
     const indexOfFolder = newIcons.findIndex((e) => e.id === idFolder)
+
     console.log(indexOfFolder)
-    newIcons[indexOfFolder].slots = [
-      ...newIcons[indexOfFolder].slots,
-      {
-        id,
-        type: 'shortcut',
-        link: information.link,
-        title: information.title,
-      },
-    ]
+
+    const folder: typesOfSlots = newIcons[indexOfFolder]
+
+    folder.slots.push({
+      id,
+      type: 'shortcut',
+      link: information.link,
+      title: information.title,
+    })
+
     setIcons(newIcons)
   } else {
     if (information.id) {

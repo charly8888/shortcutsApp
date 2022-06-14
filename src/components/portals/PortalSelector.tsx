@@ -11,7 +11,7 @@ interface props {
   openPortalShortcut: Function
   openPortalFolder: Function
   openPortalText: Function
-  isFolder: boolean
+  isFolder?: boolean
 }
 
 const PortalSelector: FC<props> = ({

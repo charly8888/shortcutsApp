@@ -1,8 +1,6 @@
-import React, { FC } from 'react'
+import React, { Dispatch, FC, SetStateAction } from 'react'
 import { deleteItem, openPortalAndUpdateText } from '../../lib/helpers'
 import { typesOfSlots } from '../../types/index'
-import CrossIcon from '../icons/CrossIcon'
-import EditIcon from '../icons/EditIcon'
 import TextIcon from '../icons/TextIcon'
 import ButtonClose from '../UIComponents/ButtonClose'
 import ButtonEdit from '../UIComponents/ButtonEdit'
@@ -13,7 +11,7 @@ interface props {
   id: string
   title: string
   icons: typesOfSlots[]
-  setIcons: React.Dispatch<React.SetStateAction<typesOfSlots[]>>
+  setIcons: Dispatch<SetStateAction<typesOfSlots[]>>
   openPortal: Function
   setModalText: Function
   openPortalEdit: Function
@@ -32,15 +30,15 @@ const TextSlot: FC<props> = ({
   openPortalEdit,
   secondaryColor,
   primaryColor,
-  idFolder
+  idFolder,
 }) => {
   return (
     <div
       className={` ${stylesGenerals.sizeGrid} ${styles.gridItem}`}
       draggable
       onDoubleClick={() => {
-        console.log("console del doble click",id, title, icons)
-        openPortalAndUpdateText(setModalText, id, icons, idFolder )
+        console.log('console del doble click', id, title, icons)
+        openPortalAndUpdateText(setModalText, id, icons, idFolder)
       }}
       onDragStart={(e) => {
         const target = e.target as HTMLDivElement
@@ -53,7 +51,7 @@ const TextSlot: FC<props> = ({
         <TextIcon colorBack={secondaryColor} colorFront={primaryColor} />
         {/* <a href={link} target='_blank' rel='noreferrer' draggable={false}></a> */}
       </div>
-      <p >{title}</p>
+      <p>{title}</p>
       <ButtonEdit
         className={`${styles.closeButton} ${styles.editButton}`}
         onClick={() => {
@@ -63,7 +61,6 @@ const TextSlot: FC<props> = ({
         widthAndHeightInREM={1.2}
         margin={'1.2rem 0'}
       />
-      
 
       <ButtonClose
         onClick={() => {

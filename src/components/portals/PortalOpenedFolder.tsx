@@ -2,9 +2,9 @@ import { FC, useState } from 'react'
 import { createPortal } from 'react-dom'
 import { slotsInFolder, typesOfSlots } from '../../types'
 import AddButton from '../AddSlot'
-import CrossIcon from '../icons/CrossIcon'
 import ShortcutSlot from '../Slots/ShorcutSlot'
 import TextSlot from '../Slots/TextSlot'
+import ButtonClose from '../UIComponents/ButtonClose'
 import FolderEditPortal from './edit-portals/FolderEditPortal'
 import styles from './PortalOpenedFolder.module.scss'
 import PortalSelector from './PortalSelector'
@@ -19,12 +19,10 @@ interface props {
 }
 
 const PortalOpenedFolder: FC<props> = ({ closePortal, icons, setIcons, idFolder }) => {
-
-  
   console.log(idFolder)
   console.log(icons)
 
-  const { slots }: { slots: slotsInFolder[] } = icons.find((e) => e.id === idFolder)
+  const { slots, title }: { slots: slotsInFolder[] } = icons.find((e) => e.id === idFolder)
 
   const [selectorOfItem, setSelectorOfItem] = useState(false)
   const [modalText, setModalText] = useState({
@@ -45,7 +43,7 @@ const PortalOpenedFolder: FC<props> = ({ closePortal, icons, setIcons, idFolder 
   return createPortal(
     <main className={styles.containerGlobal}>
       <section className={styles.windowSection}>
-        <h4 className={styles.title}>asdasd</h4>
+        <header className={styles.title}>{title}</header>
         <section className={styles.wrapperItems}>
           {slots?.map((icon) => {
             switch (icon.type) {
@@ -88,9 +86,11 @@ const PortalOpenedFolder: FC<props> = ({ closePortal, icons, setIcons, idFolder 
             <AddButton openPortal={() => setSelectorOfItem(true)} />
           </section>
         </section>
-        <button onClick={() => closePortal()} className={styles.buttonClose}>
-          <CrossIcon className={styles.crossIcon} />
-        </button>
+        <ButtonClose
+          widthAndHeightInREM={2}
+          onClick={() => closePortal()}
+          className={styles.buttonClose}
+        />
       </section>
       {selectorOfItem && (
         <PortalSelector

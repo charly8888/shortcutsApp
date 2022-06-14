@@ -1,5 +1,5 @@
 export function getRandomHexadecimalColor() {
-  function getRandomvalue(randomNumber) {
+  function getRandomvalue(randomNumber: number) {
     if (randomNumber === 0 || randomNumber < 0.0625) return '0'
     if (randomNumber === 0.0625 || randomNumber < 0.125) return '1'
     if (randomNumber === 0.125 || randomNumber < 0.1875) return '2'

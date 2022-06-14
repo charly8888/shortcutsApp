@@ -17,11 +17,18 @@ import TextSlot from './Slots/TextSlot'
 const ContainerApp = () => {
   const [icons, setIcons] = useState(INITIAL_STATE_OF_GRID_ITEMS)
   const [modalSelector, setModalSelector] = useState(false)
-  const [modalShortcut, setModalShortcut] = useState({ boolean: false, id: '' })
+  const [modalShortcut, setModalShortcut] = useState({
+    boolean: false,
+    id: '',
+    link: '',
+    title: '',
+  })
 
   const [modalText, setModalText] = useState({
     boolean: false,
     id: '',
+    title: '',
+    description: '',
   })
   const [modalEdit, setModalEdit] = useState({
     boolean: false,
@@ -61,7 +68,7 @@ const ContainerApp = () => {
                   icons={icons}
                   setIcons={setIcons}
                   openPortal={() => {
-                    setModalText({ boolean: true, id: icon.id })
+                    setModalText({ boolean: true, id: icon.id, title: '', description: '' })
                   }}
                   setModalText={setModalText}
                   openPortalEdit={() => {
@@ -80,7 +87,7 @@ const ContainerApp = () => {
                   icons={icons}
                   setIcons={setIcons}
                   openPortal={() => {
-                    setModalEdit({ boolean: true, id: icon.id, type: 'folder' })
+                    setModalEdit({ boolean: true, id: icon.id, type: 'folder', isNew: false })
                   }}
                   primaryColor={icon.primaryColor}
                   secondaryColor={icon.secondaryColor}
@@ -112,7 +119,9 @@ const ContainerApp = () => {
       {modalSelector && (
         <PortalSelector
           closePortalSelector={() => setModalSelector(false)}
-          openPortalShortcut={() => setModalShortcut({ boolean: true, id: '' })}
+          openPortalShortcut={() =>
+            setModalShortcut({ boolean: true, id: '', link: '', title: '' })
+          }
           openPortalFolder={() =>
             setModalEdit({ boolean: true, id: '', type: 'folder', isNew: true })
           }
@@ -123,14 +132,14 @@ const ContainerApp = () => {
         <PortalShortcut
           setIcons={setIcons}
           icons={icons}
-          closePortal={() => setModalShortcut({ boolean: false, id: '' })}
+          closePortal={() => setModalShortcut({ boolean: false, id: '', link: '', title: '' })}
           modalShortcut={modalShortcut}
         />
       )}
 
       {modalText.boolean && (
         <PortalText
-          closePortal={() => setModalText({ boolean: false, id: '' })}
+          closePortal={() => setModalText({ boolean: false, id: '', description: '', title: '' })}
           icons={icons}
           setIcons={setIcons}
           modalText={modalText}

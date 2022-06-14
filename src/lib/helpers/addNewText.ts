@@ -60,7 +60,7 @@ export function addNewText(
       const indexOfFolder = newIcons.findIndex((e) => e.id === idFolder)
       const { slots } = newIcons[indexOfFolder]
 
-      const selectedText = slots.find((e) => e.id === id)
+      const selectedText = slots.find((e: text) => e.id === id)
 
       selectedText.text = information.description
       selectedText.title = information.title
