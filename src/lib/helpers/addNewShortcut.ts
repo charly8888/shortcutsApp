@@ -9,7 +9,7 @@ export function addNewShortcut(
   information: {
     link: string
     title: string
-    description: string
+    id: string
   },
   idFolder: string
 ) {
@@ -25,22 +25,33 @@ export function addNewShortcut(
         id,
         type: 'shortcut',
         link: information.link,
-        description: information.description,
         title: information.title,
       },
     ]
     setIcons(newIcons)
   } else {
-    const indexOfFirstEmpty = newIcons.findIndex((e) => e.type === 'empty')
+    if (information.id) {
+      const indexOftarget = newIcons.findIndex((e) => e.id === information.id)
 
-    newIcons[indexOfFirstEmpty] = {
-      id: newIcons[indexOfFirstEmpty].id,
-      type: 'shortcut',
-      link: information.link,
-      description: information.description,
-      title: information.title,
-    } as shortcut
+      newIcons[indexOftarget] = {
+        id: newIcons[indexOftarget].id,
+        type: 'shortcut',
+        link: information.link,
+        title: information.title,
+      } as shortcut
 
-    setIcons(newIcons)
+      setIcons(newIcons)
+    } else {
+      const indexOfFirstEmpty = newIcons.findIndex((e) => e.type === 'empty')
+
+      newIcons[indexOfFirstEmpty] = {
+        id: newIcons[indexOfFirstEmpty].id,
+        type: 'shortcut',
+        link: information.link,
+        title: information.title,
+      } as shortcut
+
+      setIcons(newIcons)
+    }
   }
 }

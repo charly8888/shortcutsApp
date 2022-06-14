@@ -16,8 +16,9 @@ import TextSlot from './Slots/TextSlot'
 
 const ContainerApp = () => {
   const [icons, setIcons] = useState(INITIAL_STATE_OF_GRID_ITEMS)
-  const [modalShortcut, setModalShortcut] = useState(false)
   const [modalSelector, setModalSelector] = useState(false)
+  const [modalShortcut, setModalShortcut] = useState({ boolean: false, id: '' })
+
   const [modalText, setModalText] = useState({
     boolean: false,
     id: '',
@@ -95,6 +96,7 @@ const ContainerApp = () => {
                   link={icon.link}
                   icons={icons}
                   setIcons={setIcons}
+                  setModalShortcut={setModalShortcut}
                 />
               )
             default:
@@ -110,18 +112,19 @@ const ContainerApp = () => {
       {modalSelector && (
         <PortalSelector
           closePortalSelector={() => setModalSelector(false)}
-          openPortalShortcut={() => setModalShortcut(true)}
+          openPortalShortcut={() => setModalShortcut({ boolean: true, id: '' })}
           openPortalFolder={() =>
             setModalEdit({ boolean: true, id: '', type: 'folder', isNew: true })
           }
           openPortalText={() => setModalEdit({ boolean: true, id: '', type: 'text', isNew: true })}
         />
       )}
-      {modalShortcut && (
+      {modalShortcut.boolean && (
         <PortalShortcut
           setIcons={setIcons}
           icons={icons}
-          closePortal={() => setModalShortcut(false)}
+          closePortal={() => setModalShortcut({ boolean: false, id: '' })}
+          modalShortcut={modalShortcut}
         />
       )}
 

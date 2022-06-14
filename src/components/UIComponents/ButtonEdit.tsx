@@ -1,17 +1,19 @@
 import React, { FC } from 'react'
-import CheckIcon from '../icons/CheckIcon'
+import EditIcon from '../icons/EditIcon'
 
 interface props {
   onClick?: React.MouseEventHandler<HTMLButtonElement>
   widthAndHeightInREM?: number
   margin?: string
   backgroundColor?: string
+  className?: string
 }
-const ButtonSave: FC<props> = ({
+const ButtonEdit: FC<props> = ({
   onClick,
   margin = '1rem',
   widthAndHeightInREM = 1.5,
-  backgroundColor = '#13b176',
+  backgroundColor,
+  className,
 }) => {
   return (
     <button
@@ -23,19 +25,20 @@ const ButtonSave: FC<props> = ({
         backgroundColor: `${backgroundColor}`,
         position: 'absolute',
         top: 0,
-        right: 0,
+        left: 0,
         borderRadius: '50%',
         border: 'none',
         display: 'flex',
         alignItems: 'center',
 
-        padding: '.1rem',
+        padding: '.2rem',
         justifyContent: 'center',
       }}
+      className={className}
     >
-      <CheckIcon />
+      <EditIcon />
     </button>
   )
 }
 
-export default ButtonSave
+export default ButtonEdit

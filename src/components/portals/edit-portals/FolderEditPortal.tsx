@@ -8,6 +8,7 @@ import LockOpen from '../../icons/LockOpen'
 import TextIcon from '../../icons/TextIcon'
 import SelectorDefaultColor from '../../Slots/components/SelectorDefaultColor'
 import ButtonClose from '../../UIComponents/ButtonClose'
+import ButtonSave from '../../UIComponents/ButtonSave'
 import styles from './FolderPortal.module.scss'
 
 interface props {
@@ -25,11 +26,8 @@ const FolderEditPortal: FC<props> = ({ closePortal, sendIcons, modalEdit, setIco
     const emptyIndex = icons.findIndex((e) => e.type === 'empty')
 
     itemProps = { id: icons[emptyIndex].id, type: modalEdit.type }
-
-
   } else {
-
-     itemProps = icons.find((e) => e.id === modalEdit.id)
+    itemProps = icons.find((e) => e.id === modalEdit.id)
   }
 
   const [itemNewProps, setItemNewProps] = useState(itemProps)
@@ -60,6 +58,7 @@ const FolderEditPortal: FC<props> = ({ closePortal, sendIcons, modalEdit, setIco
             closePortal()
             handleSetIconsForCancelOperation()
           }}
+          widthAndHeightInREM={1.75}
           margin={'0.75rem'}
         />
         <section className={styles.containerLeft}>
@@ -70,6 +69,7 @@ const FolderEditPortal: FC<props> = ({ closePortal, sendIcons, modalEdit, setIco
               updateFolderOrShortcutStyle({ setIcons, icons, newIcon: itemNewProps })
             }}
           >
+            <ButtonSave widthAndHeightInREM={1.75} margin={'.75rem'} />
             <label className={styles.containerTitle}>
               <h2>Title:</h2>
               <input
@@ -101,57 +101,58 @@ const FolderEditPortal: FC<props> = ({ closePortal, sendIcons, modalEdit, setIco
               </section>
               <section className={styles.containerCustomSelect}>
                 <p>Custom</p>
-                <input
-                  value={itemNewProps.primaryColor}
-                  type={'color'}
-                  onChange={(e) =>
-                    setItemNewProps({ ...itemNewProps, primaryColor: e.target.value })
-                  }
-                />
-                <div className={styles.containerLock}>
-                  {isBlokedColorPrimary ? <LockClosed /> : <LockOpen />}
+                <div className={`${styles.containerCustomSelect} ${styles.containerRandomSection}`}>
                   <input
-                    type={'checkbox'}
-                    onChange={() => setIsBlokedColorPrimary(!isBlokedColorPrimary)}
-                    // className={styles.containerLock}
+                    value={itemNewProps.primaryColor}
+                    type={'color'}
+                    onChange={(e) =>
+                      setItemNewProps({ ...itemNewProps, primaryColor: e.target.value })
+                    }
                   />
-                </div>
-                <button
-                  className={styles.randomButton}
-                  onClick={(e) => {
-                    e.preventDefault()
-                    const primaryColor = isBlokedColorPrimary
-                      ? itemNewProps.primaryColor
-                      : getRandomHexadecimalColor()
-                    const secondaryColor = isBlokedColorSecondary
-                      ? itemNewProps.secondaryColor
-                      : getRandomHexadecimalColor()
-                    setItemNewProps({
-                      ...itemNewProps,
-                      secondaryColor,
-                      primaryColor,
-                    })
-                  }}
-                >
-                  Random
-                </button>
-                <div className={styles.containerLock}>
-                  {isBlokedColorSecondary ? <LockClosed /> : <LockOpen />}
+                  <div className={styles.containerLock}>
+                    {isBlokedColorPrimary ? <LockClosed /> : <LockOpen />}
+                    <input
+                      type={'checkbox'}
+                      onChange={() => setIsBlokedColorPrimary(!isBlokedColorPrimary)}
+                      // className={styles.containerLock}
+                    />
+                  </div>
+                  <button
+                    className={styles.randomButton}
+                    onClick={(e) => {
+                      e.preventDefault()
+                      const primaryColor = isBlokedColorPrimary
+                        ? itemNewProps.primaryColor
+                        : getRandomHexadecimalColor()
+                      const secondaryColor = isBlokedColorSecondary
+                        ? itemNewProps.secondaryColor
+                        : getRandomHexadecimalColor()
+                      setItemNewProps({
+                        ...itemNewProps,
+                        secondaryColor,
+                        primaryColor,
+                      })
+                    }}
+                  >
+                    Random
+                  </button>
+                  <div className={styles.containerLock}>
+                    {isBlokedColorSecondary ? <LockClosed /> : <LockOpen />}
+                    <input
+                      type={'checkbox'}
+                      onChange={() => setIsBlokedColorSecondary(!isBlokedColorSecondary)}
+                    />
+                  </div>
                   <input
-                    type={'checkbox'}
-                    onChange={() => setIsBlokedColorSecondary(!isBlokedColorSecondary)}
-                  />
+                    value={itemNewProps.secondaryColor}
+                    type={'color'}
+                    onChange={(e) =>
+                      setItemNewProps({ ...itemNewProps, secondaryColor: e.target.value })
+                    }
+                  ></input>
                 </div>
-                <input
-                  value={itemNewProps.secondaryColor}
-                  type={'color'}
-                  onChange={(e) =>
-                    setItemNewProps({ ...itemNewProps, secondaryColor: e.target.value })
-                  }
-                ></input>
               </section>
             </fieldset>
-            <button className={styles.buttonSave}>Save</button>
           </form>
         </section>
 

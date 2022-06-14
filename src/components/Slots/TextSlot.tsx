@@ -4,6 +4,8 @@ import { typesOfSlots } from '../../types/index'
 import CrossIcon from '../icons/CrossIcon'
 import EditIcon from '../icons/EditIcon'
 import TextIcon from '../icons/TextIcon'
+import ButtonClose from '../UIComponents/ButtonClose'
+import ButtonEdit from '../UIComponents/ButtonEdit'
 import stylesGenerals from './GeneralStylesForGridItems.module.scss'
 import styles from './TextSlot.module.scss'
 
@@ -52,16 +54,28 @@ const TextSlot: FC<props> = ({
         {/* <a href={link} target='_blank' rel='noreferrer' draggable={false}></a> */}
       </div>
       <p >{title}</p>
-      <button
+      <ButtonEdit
         className={`${styles.closeButton} ${styles.editButton}`}
         onClick={() => {
           openPortalEdit()
           // console.log('hola')
         }}
-      >
-        <EditIcon className={styles.EditIcon} />
-      </button>
-      <button
+        widthAndHeightInREM={1.2}
+        margin={'1.2rem 0'}
+      />
+      
+
+      <ButtonClose
+        onClick={() => {
+          deleteItem(setIcons, icons, id)
+          console.log('hola')
+        }}
+        widthAndHeightInREM={1.2}
+        margin={'0'}
+        className={styles.closeButton}
+      />
+
+      {/* <button
         className={styles.closeButton}
         onClick={() => {
           deleteItem(setIcons, icons, id)
@@ -69,7 +83,7 @@ const TextSlot: FC<props> = ({
         }}
       >
         <CrossIcon className={styles.CrossIcon} />
-      </button>
+      </button> */}
     </div>
   )
 }

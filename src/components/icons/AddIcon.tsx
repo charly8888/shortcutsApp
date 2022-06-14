@@ -8,6 +8,7 @@ function AddIcon({ className }: PropsWithChildren<props>) {
       viewBox='0 0 24 24'
       stroke='currentColor'
       strokeWidth={2}
+      width="100%"
       className={className}
     >
       <path strokeLinecap='round' strokeLinejoin='round' d='M12 4v16m8-8H4' />

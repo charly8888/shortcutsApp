@@ -1,8 +1,8 @@
 import React, { FC } from 'react'
 import { deleteItem } from '../../lib/helpers'
 import { typesOfSlots } from '../../types'
-import CrossIcon from '../icons/CrossIcon'
-import EditIcon from '../icons/EditIcon'
+import ButtonClose from '../UIComponents/ButtonClose'
+import ButtonEdit from '../UIComponents/ButtonEdit'
 import stylesGenerals from './GeneralStylesForGridItems.module.scss'
 import styles from './ShortcutSlot.module.scss'
 
@@ -12,9 +12,10 @@ interface props {
   icons: typesOfSlots[]
   setIcons: React.Dispatch<React.SetStateAction<typesOfSlots[]>>
   link: string
+  setModalShortcut: Function
 }
 
-const ShortcutSlot: FC<props> = ({ id, title, link, icons, setIcons }) => {
+const ShortcutSlot: FC<props> = ({ id, title, link, icons, setIcons, setModalShortcut }) => {
   return (
     <div
       className={` ${stylesGenerals.sizeGrid} ${styles.gridItem}`}
@@ -27,28 +28,29 @@ const ShortcutSlot: FC<props> = ({ id, title, link, icons, setIcons }) => {
       id={id}
     >
       <div className={styles.containerContent}>
-        <img src={`${link}/favicon.png`} />
+        <img src={`${link}/favicon.ico`} />
         <a href={link} target='_blank' rel='noreferrer' draggable={false}></a>
       </div>
       <p>{title}</p>
-      <button
+      <ButtonEdit
         className={`${styles.closeButton} ${styles.editButton}`}
         onClick={() => {
-          deleteItem(setIcons, icons, id)
+          setModalShortcut({ boolean: true, id, title, link })
           console.log('hola')
         }}
-      >
-        <EditIcon className={styles.EditIcon} />
-      </button>
-      <button
-        className={styles.closeButton}
+        widthAndHeightInREM={1.2}
+        margin={'1.2rem 0'}
+      />
+
+      <ButtonClose
         onClick={() => {
           deleteItem(setIcons, icons, id)
           console.log('hola')
         }}
-      >
-        <CrossIcon className={styles.CrossIcon} />
-      </button>
+        widthAndHeightInREM={1.2}
+        margin={'0'}
+        className={styles.closeButton}
+      />
     </div>
   )
 }

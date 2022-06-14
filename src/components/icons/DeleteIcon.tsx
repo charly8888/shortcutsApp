@@ -7,6 +7,7 @@ function DeleteIcon({ className }: PropsWithChildren<props>) {
       viewBox='0 0 24 24'
       stroke='currentColor'
       strokeWidth={2}
+      width='100%'
       className={className}
     >
       <path

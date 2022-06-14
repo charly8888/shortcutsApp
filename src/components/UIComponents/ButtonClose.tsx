@@ -6,12 +6,14 @@ interface props {
   widthAndHeightInREM?: number
   margin?: string
   backgroundColor?: string
+  className?: string
 }
 const ButtonClose: FC<props> = ({
   onClick,
   margin = '1rem',
   widthAndHeightInREM = 1.5,
   backgroundColor = 'red',
+  className
 }) => {
   return (
     <button
@@ -29,7 +31,9 @@ const ButtonClose: FC<props> = ({
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
+        padding: "0.1rem"
       }}
+      className={className}
     >
       <CrossIcon />
     </button>

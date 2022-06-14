@@ -1,9 +1,9 @@
 import React, { FC } from 'react'
 import { deleteItem } from '../../lib/helpers'
 import { typesOfSlots } from '../../types/index'
-import CrossIcon from '../icons/CrossIcon'
-import EditIcon from '../icons/EditIcon'
 import FolderIcon from '../icons/FolderIcon'
+import ButtonClose from '../UIComponents/ButtonClose'
+import ButtonEdit from '../UIComponents/ButtonEdit'
 import styles from './FolderSlot.module.scss'
 import stylesGenerals from './GeneralStylesForGridItems.module.scss'
 
@@ -45,23 +45,24 @@ const FolderSlot: FC<props> = ({
         {/* <a href={link} target='_blank' rel='noreferrer' draggable={false}></a> */}
       </div>
       <p>{title}</p>
-      <button
+      <ButtonEdit
         className={`${styles.closeButton} ${styles.editButton}`}
         onClick={() => {
           openPortal()
         }}
-      >
-        <EditIcon className={styles.EditIcon} />
-      </button>
-      <button
-        className={styles.closeButton}
+        widthAndHeightInREM={1.2}
+        margin={'1.2rem 0'}
+      />
+
+      <ButtonClose
         onClick={() => {
           deleteItem(setIcons, icons, id)
           console.log('hola')
         }}
-      >
-        <CrossIcon className={styles.CrossIcon} />
-      </button>
+        widthAndHeightInREM={1.2}
+        margin={'0'}
+        className={styles.closeButton}
+      />
     </div>
   )
 }

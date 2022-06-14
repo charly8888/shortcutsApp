@@ -28,7 +28,6 @@ const PortalText: FC<props> = ({ closePortal, setIcons, icons, modalText, idFold
   const [information, setInformation] = useState({ description, title })
 
   console.log('information', information)
-  const modalContainer = document.getElementById('modal-selector') as HTMLElement
   return createPortal(
     <main className={styles.containerGlobal}>
       <form
@@ -41,7 +40,7 @@ const PortalText: FC<props> = ({ closePortal, setIcons, icons, modalText, idFold
           closePortal()
         }}
       >
-        <p className={styles.title}>{information.title}</p>
+        <header className={styles.title}>{information.title}</header>
         <textarea
           name='description'
           value={information.description}
@@ -51,7 +50,7 @@ const PortalText: FC<props> = ({ closePortal, setIcons, icons, modalText, idFold
         <ButtonSave widthAndHeightInREM={2} />
       </form>
     </main>,
-    modalContainer
+    document.getElementById('modal-selector') as HTMLElement
   )
 }
 
