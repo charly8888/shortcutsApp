@@ -5,7 +5,6 @@ import AddSlot from './AddSlot'
 import styles from './ContainerApp.module.scss'
 import ConfigurationIcon from './icons/ConfigurationIcon'
 import FolderEditPortal from './portals/edit-portals/FolderEditPortal'
-import PortalFolder from './portals/PortalFolder'
 import PortalOpenedFolder from './portals/PortalOpenedFolder'
 import PortalSelector from './portals/PortalSelector'
 import PortalShortcut from './portals/PortalShortcut'
@@ -19,7 +18,6 @@ const ContainerApp = () => {
   const [icons, setIcons] = useState(INITIAL_STATE_OF_GRID_ITEMS)
   const [modalShortcut, setModalShortcut] = useState(false)
   const [modalSelector, setModalSelector] = useState(false)
-  const [modalFolder, setModalFolder] = useState(false)
   const [modalText, setModalText] = useState({
     boolean: false,
     id: '',
@@ -27,6 +25,8 @@ const ContainerApp = () => {
   const [modalEdit, setModalEdit] = useState({
     boolean: false,
     id: '',
+    type: '',
+    isNew: false,
   })
   const [isFolderOpened, setIsFolderOpened] = useState({ boolean: false, id: '' })
 
@@ -47,7 +47,7 @@ const ContainerApp = () => {
   return (
     <main className={styles.containerApp}>
       <section className={styles.gridTemplate}>
-        {icons.map((icon) => {
+        {icons?.map((icon) => {
           switch (icon.type) {
             case 'empty':
               return <EmptySlot key={icon.id} id={icon.id} setIcons={setIcons} icons={icons} />
@@ -64,7 +64,7 @@ const ContainerApp = () => {
                   }}
                   setModalText={setModalText}
                   openPortalEdit={() => {
-                    setModalEdit({ boolean: true, id: icon.id })
+                    setModalEdit({ boolean: true, id: icon.id, type: 'text', isNew: false })
                   }}
                   primaryColor={icon.primaryColor}
                   secondaryColor={icon.secondaryColor}
@@ -79,7 +79,7 @@ const ContainerApp = () => {
                   icons={icons}
                   setIcons={setIcons}
                   openPortal={() => {
-                    setModalEdit({ boolean: true, id: icon.id })
+                    setModalEdit({ boolean: true, id: icon.id, type: 'folder' })
                   }}
                   primaryColor={icon.primaryColor}
                   secondaryColor={icon.secondaryColor}
@@ -111,8 +111,10 @@ const ContainerApp = () => {
         <PortalSelector
           closePortalSelector={() => setModalSelector(false)}
           openPortalShortcut={() => setModalShortcut(true)}
-          openPortalFolder={() => setModalFolder(true)}
-          openPortalText={() => setModalText({ boolean: true, id: '' })}
+          openPortalFolder={() =>
+            setModalEdit({ boolean: true, id: '', type: 'folder', isNew: true })
+          }
+          openPortalText={() => setModalEdit({ boolean: true, id: '', type: 'text', isNew: true })}
         />
       )}
       {modalShortcut && (
@@ -122,9 +124,7 @@ const ContainerApp = () => {
           closePortal={() => setModalShortcut(false)}
         />
       )}
-      {modalFolder && (
-        <PortalFolder closePortal={() => setModalFolder(false)} icons={icons} setIcons={setIcons} />
-      )}
+
       {modalText.boolean && (
         <PortalText
           closePortal={() => setModalText({ boolean: false, id: '' })}
@@ -135,8 +135,10 @@ const ContainerApp = () => {
       )}
       {modalEdit.boolean && (
         <FolderEditPortal
-          closePortal={() => setModalEdit({ boolean: false, id: '' })}
-          icons={icons}
+          closePortal={() => {
+            setModalEdit({ boolean: false, id: '', type: '', isNew: false })
+          }}
+          sendIcons={icons}
           setIcons={setIcons}
           modalEdit={modalEdit}
         />

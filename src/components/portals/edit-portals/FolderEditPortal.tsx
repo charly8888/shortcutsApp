@@ -12,16 +12,29 @@ import styles from './FolderPortal.module.scss'
 
 interface props {
   closePortal: Function
-  icons: typesOfSlots[]
+  sendIcons: typesOfSlots[]
   setIcons: Function
-  modalEdit: { boolean: boolean; id: string }
+  modalEdit: { boolean: boolean; id: string; type: string; isNew: boolean }
 }
-const FolderEditPortal: FC<props> = ({ closePortal, icons, modalEdit, setIcons }) => {
-  const itemProps = icons.find((e) => e.id === modalEdit.id)
+const FolderEditPortal: FC<props> = ({ closePortal, sendIcons, modalEdit, setIcons }) => {
+  const icons = [...sendIcons]
+
+  let itemProps
+
+  if (modalEdit.isNew) {
+    const emptyIndex = icons.findIndex((e) => e.type === 'empty')
+
+    itemProps = { id: icons[emptyIndex].id, type: modalEdit.type }
+
+
+  } else {
+
+     itemProps = icons.find((e) => e.id === modalEdit.id)
+  }
 
   const [itemNewProps, setItemNewProps] = useState(itemProps)
-  const [isBlokedColorPrimary, setIsBlokedColorPrimary] = useState(false)
   const [isBlokedColorSecondary, setIsBlokedColorSecondary] = useState(false)
+  const [isBlokedColorPrimary, setIsBlokedColorPrimary] = useState(false)
 
   console.groupCollapsed('FolderEditPortal')
   console.log('icons', icons)
@@ -42,10 +55,17 @@ const FolderEditPortal: FC<props> = ({ closePortal, icons, modalEdit, setIcons }
   return (
     <section className={styles.containerApp}>
       <main className={styles.containerEditSection}>
-        <ButtonClose onClick={() => closePortal()} margin={'0.75rem'} />
+        <ButtonClose
+          onClick={() => {
+            closePortal()
+            handleSetIconsForCancelOperation()
+          }}
+          margin={'0.75rem'}
+        />
         <section className={styles.containerLeft}>
           <form
-            onSubmit={() => {
+            onSubmit={(e) => {
+              e.preventDefault()
               closePortal()
               updateFolderOrShortcutStyle({ setIcons, icons, newIcon: itemNewProps })
             }}

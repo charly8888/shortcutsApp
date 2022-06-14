@@ -19,6 +19,11 @@ interface props {
 }
 
 const PortalOpenedFolder: FC<props> = ({ closePortal, icons, setIcons, idFolder }) => {
+
+  
+  console.log(idFolder)
+  console.log(icons)
+
   const { slots }: { slots: slotsInFolder[] } = icons.find((e) => e.id === idFolder)
 
   const [selectorOfItem, setSelectorOfItem] = useState(false)
@@ -42,7 +47,7 @@ const PortalOpenedFolder: FC<props> = ({ closePortal, icons, setIcons, idFolder 
       <section className={styles.windowSection}>
         <h4 className={styles.title}>asdasd</h4>
         <section className={styles.wrapperItems}>
-          {slots.map((icon) => {
+          {slots?.map((icon) => {
             switch (icon.type) {
               case 'text':
                 return (
