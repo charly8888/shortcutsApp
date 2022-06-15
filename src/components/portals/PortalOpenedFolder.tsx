@@ -40,7 +40,12 @@ const PortalOpenedFolder: FC<props> = ({ closePortal, icons, setIcons, idFolder 
     isNew: false,
     idFolder: '',
   })
-  const [modalShortcut, setModalShortcut] = useState(false)
+  const [modalShortcut, setModalShortcut] = useState({
+    boolean: false,
+    id: '',
+    link: '',
+    title: '',
+  })
 
   return createPortal(
     <main className={styles.containerGlobal}>
@@ -84,6 +89,8 @@ const PortalOpenedFolder: FC<props> = ({ closePortal, icons, setIcons, idFolder 
                     link={icon.link}
                     icons={icons}
                     setIcons={setIcons}
+                    setModalShortcut={setModalShortcut}
+                    idFolder={idFolder}
                   />
                 )
               default:
@@ -106,7 +113,9 @@ const PortalOpenedFolder: FC<props> = ({ closePortal, icons, setIcons, idFolder 
           openPortalText={() =>
             setModalEdit({ boolean: true, id: '', type: 'text', isNew: true, idFolder })
           }
-          openPortalShortcut={() => setModalShortcut(true)}
+          openPortalShortcut={() =>
+            setModalShortcut({ boolean: true, id: '', link: '', title: '' })
+          }
           isFolder={true}
         />
       )}
@@ -119,12 +128,13 @@ const PortalOpenedFolder: FC<props> = ({ closePortal, icons, setIcons, idFolder 
           idFolder={idFolder}
         />
       )}
-      {modalShortcut && (
+      {modalShortcut.boolean && (
         <PortalShortcut
           setIcons={setIcons}
           icons={icons}
-          closePortal={() => setModalShortcut(false)}
+          closePortal={() => setModalShortcut({ boolean: false, id: '', link: '', title: '' })}
           idFolder={idFolder}
+          modalShortcut={modalShortcut}
         />
       )}
       {modalEdit.boolean && (

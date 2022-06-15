@@ -64,7 +64,7 @@ const TextSlot: FC<props> = ({
 
       <ButtonClose
         onClick={() => {
-          deleteItem(setIcons, icons, id)
+          deleteItem(setIcons, icons, id, idFolder)
           console.log('hola')
         }}
         widthAndHeightInREM={1.2}

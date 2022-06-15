@@ -13,9 +13,18 @@ interface props {
   setIcons: React.Dispatch<React.SetStateAction<typesOfSlots[]>>
   link: string
   setModalShortcut: Function
+  idFolder: string
 }
 
-const ShortcutSlot: FC<props> = ({ id, title, link, icons, setIcons, setModalShortcut }) => {
+const ShortcutSlot: FC<props> = ({
+  id,
+  title,
+  link,
+  icons,
+  setIcons,
+  setModalShortcut,
+  idFolder,
+}) => {
   return (
     <div
       className={` ${stylesGenerals.sizeGrid} ${styles.gridItem}`}
@@ -35,7 +44,7 @@ const ShortcutSlot: FC<props> = ({ id, title, link, icons, setIcons, setModalSho
       <ButtonEdit
         className={`${styles.closeButton} ${styles.editButton}`}
         onClick={() => {
-          setModalShortcut({ boolean: true, id, title, link })
+          setModalShortcut({ boolean: true, id, title, link, idFolder })
           console.log('hola')
         }}
         widthAndHeightInREM={1.2}
@@ -44,7 +53,7 @@ const ShortcutSlot: FC<props> = ({ id, title, link, icons, setIcons, setModalSho
 
       <ButtonClose
         onClick={() => {
-          deleteItem(setIcons, icons, id)
+          deleteItem(setIcons, icons, id, idFolder)
           console.log('hola')
         }}
         widthAndHeightInREM={1.2}

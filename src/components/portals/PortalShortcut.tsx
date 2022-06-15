@@ -36,7 +36,6 @@ const PortalShortcut: FC<props> = ({ closePortal, setIcons, icons, idFolder, mod
           name='title'
           value={information.title}
           onChange={(e) => setInformation({ ...information, title: e.target.value })}
-          
         />
         <p>Link</p>
         <input

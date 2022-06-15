@@ -33,23 +33,24 @@
   overflow: hidden;
   display: flex;
   padding: 0 1.5rem 1.5rem 1.5rem;
+  color: #a0aec0;
   flex-direction: column;
 }
 .title {
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #a0aec0;
   font-weight: 400;
   height: 4rem;
 }
 .wrapperItems {
   display: flex;
   flex-wrap: wrap;
+  // justify-content: space-between;
   // align-items: flex-start;
-  border: 1px dashed greenyellow;
+  // border: 1px dashed greenyellow;
   // flex-grow: 1;
-  height: 100%;
+  min-height: 6rem;
   position: relative;
   overflow-y: scroll;
 }
