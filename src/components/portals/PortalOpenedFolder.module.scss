@@ -48,11 +48,16 @@
   flex-wrap: wrap;
   // justify-content: space-between;
   // align-items: flex-start;
-  // border: 1px dashed greenyellow;
+  border: 1px dashed greenyellow;
   // flex-grow: 1;
   min-height: 6rem;
+  // max-height: 100%;
   position: relative;
   overflow-y: scroll;
+  // scrollbar-color: transparent;
+}
+.wrapperItems::-webkit-scrollbar {
+  display: none;
 }
 .containerButtonAdd {
   width: 3rem;
