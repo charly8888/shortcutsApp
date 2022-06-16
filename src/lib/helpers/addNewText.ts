@@ -54,7 +54,7 @@ export function addNewText(
         ...newIcons[indexOfTextItem],
         text: information.description,
         title: information.title,
-      }
+      } as any
       setIcons(newIcons)
     } else {
       console.log('hola desde la parte en que no es undefined el idFolder')

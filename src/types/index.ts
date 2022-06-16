@@ -1,10 +1,12 @@
 export interface empty {
+  [key: string]: any
   type: 'empty'
   id: string
   primaryColor: string
   secondaryColor: string
 }
 export interface shortcut {
+  [key: string]: any
   id: string
   type: 'shortcut'
   title: string
@@ -13,6 +15,7 @@ export interface shortcut {
   secondaryColor: string
 }
 export interface text {
+  [key: string]: any
   id: string
   type: 'text'
   title: string

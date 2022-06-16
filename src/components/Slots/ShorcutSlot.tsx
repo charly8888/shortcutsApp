@@ -15,6 +15,9 @@ interface props {
   setModalShortcut: Function
   idFolder?: string
 }
+const regex = /[(http(s)?):\/\/(www\.)?a-zA-Z0-9@:%.\-_\+~#=]{2,256}\.[a-z]{2,6}/g
+
+const returnDomain = (dominio: string) => dominio.match(regex)
 
 const ShortcutSlot: FC<props> = ({
   id,
@@ -25,12 +28,6 @@ const ShortcutSlot: FC<props> = ({
   setModalShortcut,
   idFolder,
 }) => {
-  const regex = /[(http(s)?):\/\/(www\.)?a-zA-Z0-9@:%.\-_\+~#=]{2,256}\.[a-z]{2,6}/g
-
-  function returnDomain(dominio: string) {
-    return dominio.match(regex)[0]
-  }
-
   return (
     <div
       className={` ${stylesGenerals.sizeGrid} ${styles.gridItem}`}
