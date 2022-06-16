@@ -20,6 +20,7 @@ export function addNewText(
     if (idFolder !== undefined) {
       const id = nanoid()
       const indexOfFolder = newIcons.findIndex((e) => e.id === idFolder)
+
       newIcons[indexOfFolder].slots = [
         ...newIcons[indexOfFolder].slots,
         {
@@ -58,7 +59,7 @@ export function addNewText(
     } else {
       console.log('hola desde la parte en que no es undefined el idFolder')
       const indexOfFolder = newIcons.findIndex((e) => e.id === idFolder)
-      const { slots } = newIcons[indexOfFolder]
+      const { slots }: any = newIcons[indexOfFolder]
 
       const selectedText = slots.find((e: text) => e.id === id)
 

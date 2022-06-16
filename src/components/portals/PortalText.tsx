@@ -1,4 +1,4 @@
-import { FC, SetStateAction, useState } from 'react'
+import { FC, useState } from 'react'
 import { createPortal } from 'react-dom'
 import { addNewText } from '../../lib/helpers/addNewText'
 import { typesOfSlots } from '../../types/index'
@@ -8,7 +8,7 @@ import styles from './PortalText.module.scss'
 
 interface props {
   closePortal: () => void
-  setIcons: (value: SetStateAction<typesOfSlots[]>) => void
+  setIcons: any
   icons: typesOfSlots[]
   modalText: {
     boolean: boolean
@@ -46,8 +46,8 @@ const PortalText: FC<props> = ({ closePortal, setIcons, icons, modalText, idFold
           value={information.description}
           onChange={(e) => setInformation({ ...information, description: e.target.value })}
         />
-        <ButtonClose onClick={closePortal} widthAndHeightInREM={2} />
-        <ButtonSave widthAndHeightInREM={2} />
+        <ButtonClose onClick={closePortal} widthAndHeightInREM={2} borderRadius='0 0 1rem' />
+        <ButtonSave widthAndHeightInREM={2} borderRadius='0 0 0 1rem' />
       </form>
     </main>,
     document.getElementById('modal-selector') as HTMLElement

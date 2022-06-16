@@ -1,3 +1,5 @@
+import { slotsInFolder } from "../../types"
+
 export const updateFolderOrShortcutStyle = ({
   setIcons,
   icons,
@@ -5,8 +7,8 @@ export const updateFolderOrShortcutStyle = ({
   idFolder,
 }: {
   setIcons: Function
-  icons: typesOfSlots[]
-  newIcon: folder | shortcut
+  icons: any
+  newIcon: any
   idFolder?: string
 }) => {
   const newArrayOfIcons = [...icons]
@@ -15,7 +17,7 @@ export const updateFolderOrShortcutStyle = ({
   if (idFolder) {
     const folderTarget = newArrayOfIcons.find((e) => e.id === idFolder)
 
-    const isMatch = folderTarget.slots.findIndex((e) => e.id === newIcon.id)
+    const isMatch = folderTarget.slots.findIndex((e: slotsInFolder) => e.id === newIcon.id)
     console.log('isMatch', isMatch)
     console.log('newIcon', newIcon)
 

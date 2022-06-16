@@ -1,4 +1,4 @@
-import { FC, SetStateAction, useState } from 'react'
+import { FC, useState } from 'react'
 import { createPortal } from 'react-dom'
 import { addNewShortcut } from '../../lib/helpers'
 import { typesOfSlots } from '../../types'
@@ -7,7 +7,7 @@ import ButtonSave from '../UIComponents/ButtonSave'
 import styles from './PortalShortcut.module.scss'
 interface props {
   closePortal: Function
-  setIcons: (value: SetStateAction<typesOfSlots[]>) => void
+  setIcons: any
   icons: typesOfSlots[]
   idFolder?: string
   modalShortcut: { boolean: boolean; link: string; title: string; id: string }
@@ -29,8 +29,8 @@ const PortalShortcut: FC<props> = ({ closePortal, setIcons, icons, idFolder, mod
           closePortal()
         }}
       >
-        <ButtonClose onClick={() => closePortal()} />
-        <ButtonSave />
+        <ButtonClose onClick={() => closePortal()} borderRadius='0 0 .5rem 0' />
+        <ButtonSave borderRadius='0 0  0 .5rem ' />
         <p>Title</p>
         <input
           name='title'

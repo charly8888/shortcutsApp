@@ -9,7 +9,7 @@ import styles from './PortalSelector.module.scss'
 interface props {
   closePortalSelector: Function
   openPortalShortcut: Function
-  openPortalFolder: Function
+  openPortalFolder?: Function
   openPortalText: Function
   isFolder?: boolean
 }
@@ -33,8 +33,23 @@ const PortalSelector: FC<props> = ({
           }}
           className={styles.buttonIcon}
         >
-          <LinkIcon />
+          <div className={styles.containerIcon}>
+            <LinkIcon />
+          </div>
         </button>
+        {!isFolder && (
+          <button
+            onClick={() => {
+              closePortalSelector()
+              openPortalFolder && openPortalFolder()
+            }}
+            className={styles.buttonIcon}
+          >
+            <div className={styles.containerFolder}>
+              <FolderIcon colorFront={'#ffca28'} colorBack={'#ffa000'} />
+            </div>
+          </button>
+        )}
         <button
           onClick={() => {
             closePortalSelector()
@@ -42,20 +57,11 @@ const PortalSelector: FC<props> = ({
           }}
           className={styles.buttonIcon}
         >
-          <TextIcon colorFront={'#90caf9'} colorBack={'#1976d2'} />
+          <div className={styles.containerText}>
+            <TextIcon colorFront={'#90caf9'} colorBack={'#1976d2'} />
+          </div>
         </button>
-        {!isFolder && (
-          <button
-            onClick={() => {
-              closePortalSelector()
-              openPortalFolder()
-            }}
-            className={styles.buttonIcon}
-          >
-            <FolderIcon colorFront={'#ffca28'} colorBack={'#ffa000'} />
-          </button>
-        )}
-        <ButtonClose onClick={() => closePortalSelector()} />
+        <ButtonClose onClick={() => closePortalSelector()} borderRadius='0 0 .5rem' />
       </section>
     </main>,
     document.getElementById('modal-selector') as HTMLElement

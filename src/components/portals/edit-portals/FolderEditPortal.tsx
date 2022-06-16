@@ -16,19 +16,21 @@ interface props {
   closePortal: Function
   sendIcons: typesOfSlots[]
   setIcons: Function
-  modalEdit: { boolean: boolean; id: string; type: string; isNew: boolean; idFolder: string }
+  modalEdit: { boolean: boolean; id: string; type: string; isNew: boolean; idFolder?: string }
 }
 const FolderEditPortal: FC<props> = ({ closePortal, sendIcons, modalEdit, setIcons }) => {
   const icons: typesOfSlots[] = [...sendIcons]
 
-  let itemProps: {
-    id: string
-    type: string
-    primaryColor: string
-    secondaryColor: string
-    title: string
-    slots: []
-  }
+  let itemProps:
+    | {
+        id: string
+        type: string
+        primaryColor: string
+        secondaryColor: string
+        title: string
+        slots: []
+      }
+    | any
 
   if (modalEdit.isNew) {
     if (modalEdit.idFolder) {
@@ -58,7 +60,7 @@ const FolderEditPortal: FC<props> = ({ closePortal, sendIcons, modalEdit, setIco
     if (modalEdit.idFolder) {
       const targetFolder = icons.find((e) => e.id === modalEdit.idFolder)
 
-      itemProps = targetFolder.slots.find((e) => e.id === modalEdit.id)
+      itemProps = targetFolder?.slots.find((e: any) => e.id === modalEdit.id)
     } else {
       itemProps = icons.find((e) => e.id === modalEdit.id)
     }
@@ -92,8 +94,8 @@ const FolderEditPortal: FC<props> = ({ closePortal, sendIcons, modalEdit, setIco
           onClick={() => {
             closePortal()
           }}
-          widthAndHeightInREM={1.75}
-          margin={'0.75rem'}
+          widthAndHeightInREM={2.5}
+          borderRadius='0 0 1rem'
         />
         <section className={styles.containerLeft}>
           <form
@@ -108,7 +110,7 @@ const FolderEditPortal: FC<props> = ({ closePortal, sendIcons, modalEdit, setIco
               })
             }}
           >
-            <ButtonSave widthAndHeightInREM={1.75} margin={'.75rem'} />
+            <ButtonSave borderRadius='0 0 0 1rem' widthAndHeightInREM={2.5} />
             <label className={styles.containerTitle}>
               <h2>Title:</h2>
               <input

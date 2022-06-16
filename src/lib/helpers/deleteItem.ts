@@ -1,17 +1,17 @@
 import React from 'react'
 import { typesOfSlots } from '../../types'
-import { empty } from '../../types/index'
+import { empty, folder } from '../../types/index'
 
 export const deleteItem = (
   setIcons: React.Dispatch<React.SetStateAction<typesOfSlots[]>>,
   icons: typesOfSlots[],
   id: string,
-  idFolder: string
+  idFolder?: string
 ) => {
   if (idFolder) {
     const newIcons = [...icons]
-    const folder = newIcons.find((e) => e.id === idFolder)
-    folder.slots = folder.slots.filter((e) => e.id !== id)
+    const folder: any = newIcons.find((e) => e.id === idFolder)
+    folder.slots = folder.slots.filter((e: folder) => e.id !== id)
 
     setIcons(newIcons)
   } else {

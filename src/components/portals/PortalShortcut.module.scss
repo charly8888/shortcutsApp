@@ -9,11 +9,14 @@
 }
 .containerSetInfo {
   max-width: 88rem;
+  overflow: hidden;
   height: auto;
   display: flex;
   flex-direction: column;
   position: relative;
-  padding: 1.5rem;
+  padding:  1.5rem ;
+  align-items: center;
   background-color: var(--color-white);
   border-radius: var(--radius-sm);
+  gap: .5rem;
 }

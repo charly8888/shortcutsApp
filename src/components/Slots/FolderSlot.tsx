@@ -51,7 +51,7 @@ const FolderSlot: FC<props> = ({
           openPortal()
         }}
         widthAndHeightInREM={1.2}
-        margin={'1.2rem 0'}
+        margin={'0 1.2rem'}
       />
 
       <ButtonClose

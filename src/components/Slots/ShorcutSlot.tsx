@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import { FC } from 'react'
 import { deleteItem } from '../../lib/helpers'
 import { typesOfSlots } from '../../types'
 import ButtonClose from '../UIComponents/ButtonClose'
@@ -10,10 +10,10 @@ interface props {
   id: string
   title: string
   icons: typesOfSlots[]
-  setIcons: React.Dispatch<React.SetStateAction<typesOfSlots[]>>
+  setIcons: any
   link: string
   setModalShortcut: Function
-  idFolder: string
+  idFolder?: string
 }
 
 const ShortcutSlot: FC<props> = ({
@@ -25,6 +25,12 @@ const ShortcutSlot: FC<props> = ({
   setModalShortcut,
   idFolder,
 }) => {
+  const regex = /[(http(s)?):\/\/(www\.)?a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}/g
+
+  function returnDomain(dominio: string) {
+    return dominio.match(regex)[0]
+  }
+
   return (
     <div
       className={` ${stylesGenerals.sizeGrid} ${styles.gridItem}`}
@@ -37,10 +43,15 @@ const ShortcutSlot: FC<props> = ({
       id={id}
     >
       <div className={styles.containerContent}>
-        <img src={`${link}/favicon.ico`} />
-        <a href={link} target='_blank' rel='noreferrer' draggable={false}></a>
+        <img src={`${returnDomain(link)}/favicon.ico`} />
       </div>
-      <p>{title}</p>
+      <a
+        href={link}
+        className={styles.linkShortcut}
+        target='_blank'
+        rel='noreferrer'
+        draggable={false}
+      ></a>
       <ButtonEdit
         className={`${styles.closeButton} ${styles.editButton}`}
         onClick={() => {
@@ -48,7 +59,7 @@ const ShortcutSlot: FC<props> = ({
           console.log('hola')
         }}
         widthAndHeightInREM={1.2}
-        margin={'1.2rem 0'}
+        margin={'0 1.2rem'}
       />
 
       <ButtonClose
@@ -60,6 +71,7 @@ const ShortcutSlot: FC<props> = ({
         margin={'0'}
         className={styles.closeButton}
       />
+      <p className={styles.title}>{title}</p>
     </div>
   )
 }

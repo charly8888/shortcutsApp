@@ -7,13 +7,15 @@ interface props {
   margin?: string
   backgroundColor?: string
   className?: string
+  borderRadius?: string
 }
 const ButtonClose: FC<props> = ({
   onClick,
-  margin = '1rem',
-  widthAndHeightInREM = 1.5,
+  margin,
+  widthAndHeightInREM = 1.8,
   backgroundColor = 'red',
-  className
+  className,
+  borderRadius = '50%',
 }) => {
   return (
     <button
@@ -26,12 +28,11 @@ const ButtonClose: FC<props> = ({
         position: 'absolute',
         top: 0,
         left: 0,
-        borderRadius: '50%',
+        borderRadius,
         border: 'none',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        padding: "0.1rem"
       }}
       className={className}
     >

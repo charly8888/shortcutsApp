@@ -10,11 +10,11 @@
   flex-direction: column;
   overflow: hidden;
   p {
-    margin: 0;
     overflow: hidden;
-    max-height: 1rem;
     text-align: center;
     width: 10ch;
-    letter-spacing: 0.01rem;
+    position: absolute;
+    height: 1.3rem;
+    bottom: 0.2rem;
   }
 }

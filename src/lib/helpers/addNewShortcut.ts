@@ -21,7 +21,7 @@ export function addNewShortcut(
     if (information.id) {
       const folder: typesOfSlots = newIcons[indexOfFolder]
 
-      const target = folder.slots.find((e) => e.id === information.id)
+      const target = folder.slots.find((e: any) => e.id === information.id)
 
       target.link = information.link
       target.title = information.title

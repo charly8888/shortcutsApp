@@ -6,12 +6,14 @@ interface props {
   widthAndHeightInREM?: number
   margin?: string
   backgroundColor?: string
+  borderRadius?: string
 }
 const ButtonSave: FC<props> = ({
   onClick,
-  margin = '1rem',
-  widthAndHeightInREM = 1.5,
+  margin = '0',
+  widthAndHeightInREM = 1.8,
   backgroundColor = '#13b176',
+  borderRadius = '50%',
 }) => {
   return (
     <button
@@ -24,12 +26,10 @@ const ButtonSave: FC<props> = ({
         position: 'absolute',
         top: 0,
         right: 0,
-        borderRadius: '50%',
+        borderRadius,
         border: 'none',
         display: 'flex',
         alignItems: 'center',
-
-        padding: '.1rem',
         justifyContent: 'center',
       }}
     >

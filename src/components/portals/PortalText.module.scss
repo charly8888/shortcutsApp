@@ -11,6 +11,7 @@
   width: 100%;
   max-width: 88rem;
   height: 100%;
+  overflow: hidden;
   max-height: 85vh;
   display: flex;
   flex-direction: column;
@@ -33,5 +34,5 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 4rem;
+  height: 3rem;
 }

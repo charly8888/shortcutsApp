@@ -13,6 +13,7 @@
   position: relative;
   padding: 2rem;
   background-color: #232327;
+  overflow: hidden;
   border-radius: var(--radius-sm);
 }
 
@@ -20,9 +21,22 @@
   width: 10rem;
   height: 10rem;
   border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   background-color: transparent;
   &:hover {
-    background-color: #37373a7a;;
+    background-color: #37373a7a;
     border-radius: var(--radius-sm);
   }
+}
+
+.containerLink {
+  width: 75%;
+}
+.containerText{
+  width: 90%;
+}
+.containerFolder{
+  width: 100%;
 }

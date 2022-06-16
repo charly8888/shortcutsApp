@@ -1,6 +1,6 @@
 import { FC, useState } from 'react'
 import { createPortal } from 'react-dom'
-import { slotsInFolder, typesOfSlots } from '../../types'
+import { typesOfSlots } from '../../types'
 import AddButton from '../AddSlot'
 import ShortcutSlot from '../Slots/ShorcutSlot'
 import TextSlot from '../Slots/TextSlot'
@@ -19,12 +19,11 @@ interface props {
 }
 
 const PortalOpenedFolder: FC<props> = ({ closePortal, icons, setIcons, idFolder }) => {
-  const { slots, title }: { slots: slotsInFolder[] } = icons.find((e) => e.id === idFolder)
+  const { slots, title }: any = icons.find((e) => e.id === idFolder)
 
   console.groupCollapsed('Modal opend folder')
   console.log('icons', icons)
   console.log('Id of folder', idFolder)
-  // console.log('')
   console.groupEnd()
   console.log('Slots of folder', slots)
 
@@ -32,6 +31,8 @@ const PortalOpenedFolder: FC<props> = ({ closePortal, icons, setIcons, idFolder 
   const [modalText, setModalText] = useState({
     boolean: false,
     id: '',
+    title: '',
+    description: '',
   })
   const [modalEdit, setModalEdit] = useState({
     boolean: false,
@@ -52,7 +53,7 @@ const PortalOpenedFolder: FC<props> = ({ closePortal, icons, setIcons, idFolder 
       <section className={styles.windowSection}>
         <header className={styles.title}>{title}</header>
         <section className={styles.wrapperItems}>
-          {slots?.map((icon) => {
+          {slots?.map((icon: typesOfSlots) => {
             switch (icon.type) {
               case 'text':
                 return (
@@ -63,7 +64,7 @@ const PortalOpenedFolder: FC<props> = ({ closePortal, icons, setIcons, idFolder 
                     icons={icons}
                     setIcons={setIcons}
                     openPortal={() => {
-                      setModalText({ boolean: true, id: icon.id })
+                      setModalText({ boolean: true, id: icon.id, title: '', description: '' })
                     }}
                     setModalText={setModalText}
                     openPortalEdit={() => {
@@ -103,6 +104,7 @@ const PortalOpenedFolder: FC<props> = ({ closePortal, icons, setIcons, idFolder 
         </section>
         <ButtonClose
           widthAndHeightInREM={2}
+          borderRadius='0 0 1rem'
           onClick={() => closePortal()}
           className={styles.buttonClose}
         />
@@ -121,7 +123,7 @@ const PortalOpenedFolder: FC<props> = ({ closePortal, icons, setIcons, idFolder 
       )}
       {modalText.boolean && (
         <PortalText
-          closePortal={() => setModalText({ boolean: false, id: '' })}
+          closePortal={() => setModalText({ boolean: false, id: '', title: '', description: '' })}
           icons={icons}
           setIcons={setIcons}
           modalText={modalText}
@@ -139,7 +141,15 @@ const PortalOpenedFolder: FC<props> = ({ closePortal, icons, setIcons, idFolder 
       )}
       {modalEdit.boolean && (
         <FolderEditPortal
-          closePortal={() => setModalEdit({ boolean: false, id: idFolder, isNew: false, type: '' })}
+          closePortal={() =>
+            setModalEdit({
+              boolean: false,
+              type: '',
+              id: '',
+              isNew: false,
+              idFolder: '',
+            })
+          }
           sendIcons={icons}
           setIcons={setIcons}
           modalEdit={modalEdit}

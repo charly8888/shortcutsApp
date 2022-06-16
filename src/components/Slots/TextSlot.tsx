@@ -1,4 +1,4 @@
-import React, { Dispatch, FC, SetStateAction } from 'react'
+import { FC } from 'react'
 import { deleteItem, openPortalAndUpdateText } from '../../lib/helpers'
 import { typesOfSlots } from '../../types/index'
 import TextIcon from '../icons/TextIcon'
@@ -11,7 +11,7 @@ interface props {
   id: string
   title: string
   icons: typesOfSlots[]
-  setIcons: Dispatch<SetStateAction<typesOfSlots[]>>
+  setIcons: any
   openPortal: Function
   setModalText: Function
   openPortalEdit: Function
@@ -59,7 +59,7 @@ const TextSlot: FC<props> = ({
           // console.log('hola')
         }}
         widthAndHeightInREM={1.2}
-        margin={'1.2rem 0'}
+        margin={'0 1.2rem'}
       />
 
       <ButtonClose
