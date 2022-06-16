@@ -25,7 +25,7 @@ const ShortcutSlot: FC<props> = ({
   setModalShortcut,
   idFolder,
 }) => {
-  const regex = /[(http(s)?):\/\/(www\.)?a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}/g
+  const regex = /[(http(s)?):\/\/(www\.)?a-zA-Z0-9@:%.\-_\+~#=]{2,256}\.[a-z]{2,6}/g
 
   function returnDomain(dominio: string) {
     return dominio.match(regex)[0]
@@ -48,7 +48,7 @@ const ShortcutSlot: FC<props> = ({
       <a
         href={link}
         className={styles.linkShortcut}
-        target='_blank'
+        // target='_blank'
         rel='noreferrer'
         draggable={false}
       ></a>
