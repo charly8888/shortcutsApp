@@ -38,6 +38,8 @@ export type typesOfSlots = empty | shortcut | folder | text
 export interface INITIAL_STATE_REDUCER {
   backgroundImage: string
   isNavbarOpen: boolean
+  currentTheme: 'dark' | 'light' | string
   handleToggleNavbar?: Function
   setImage?: Function
+  handleSetTheme?: Function
 }

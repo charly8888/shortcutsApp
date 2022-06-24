@@ -5,7 +5,9 @@ export const INITIAL_STATE_OF_GRID_ITEMS: typesOfSlots[] = []
 export const INITIAL_STATE_CONTEXT_CONFIG: INITIAL_STATE_REDUCER = {
   backgroundImage: JSON.parse(localStorage.getItem('image') || '1'),
   isNavbarOpen: false,
+  currentTheme: localStorage.getItem('theme') || 'dark',
 }
+
 type IMAGES_BACKGROUND = {}
 
 export const IMAGES: IMAGES_BACKGROUND = {

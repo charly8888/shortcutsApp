@@ -1,6 +1,7 @@
+import setTheme from './setTheme'
 type actionProp = {
-  type: 'toggleNavbarOpen' | 'setImageMulticolor'
-  payload: number
+  type: 'toggleNavbarOpen' | 'setImageMulticolor' | 'setTheme'
+  payload: number | string
 }
 
 function reducer(state: any, action: actionProp) {
@@ -17,7 +18,13 @@ function reducer(state: any, action: actionProp) {
         backgroundImage: action.payload,
       }
     }
-
+    case 'setTheme':
+      typeof action.payload === 'string' && setTheme(action.payload)
+      localStorage.setItem('theme', `${action.payload}`)
+      return {
+        ...state,
+        currentTheme: action.payload,
+      }
     default:
       throw Error('Unknown action.')
   }

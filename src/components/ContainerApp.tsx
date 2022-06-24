@@ -1,5 +1,6 @@
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { INITIAL_STATE_OF_GRID_ITEMS } from '../constants'
+import { configContex } from '../context/configContext'
 import { setGridFirstTime } from '../lib/helpers'
 import styles from './ContainerApp.module.scss'
 import Navbar from './navbar/Navbar'
@@ -37,27 +38,15 @@ const ContainerApp = () => {
   })
   const [isFolderOpened, setIsFolderOpened] = useState({ boolean: false, id: '' })
 
-  function setTheme(themeSelected: string) {
-    const headLinkElementCss: HTMLAnchorElement | null = document.querySelector('#theme-link')
-    console.log('elemenr', headLinkElementCss)
-    if (headLinkElementCss) {
-      if (themeSelected === 'light') {
-        headLinkElementCss.href = '/src/styles/themeLight.css'
-      } else {
-        headLinkElementCss.href = '/src/styles/themeDark.css'
-      }
-    }
-  }
-
+  const { handleSetTheme, currentTheme } = useContext(configContex)
   useEffect(() => {
     const items = JSON.parse(localStorage.getItem('info') || '[]')
     if (!items.length) setIcons(setGridFirstTime())
     else setIcons(items)
-    // console.log('hola desde el efect normal ', icons)
-    console.log('useEfect')
-    const themeSelected = localStorage.getItem('theme') || 'dark'
-    setTheme(themeSelected)
+    console.log(currentTheme)
+    handleSetTheme(currentTheme)
   }, [])
+
   // console.log(icons)
   useEffect(() => {
     if (icons.length) {

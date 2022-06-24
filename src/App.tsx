@@ -6,13 +6,13 @@ import { configContex, dispatchesOfConfigContext } from './context/configContext
 import reducer from './context/reducerConfigContext'
 
 function App() {
+  
   const [state, dispatch] = useReducer(reducer, INITIAL_STATE_CONTEXT_CONFIG)
-
-  const { handleToggleNavbar, setImage } = dispatchesOfConfigContext(dispatch)
+  const { handleToggleNavbar, setImage, handleSetTheme } = dispatchesOfConfigContext(dispatch)
 
   return (
     <>
-      <configContex.Provider value={{ ...state, handleToggleNavbar, setImage }}>
+      <configContex.Provider value={{ ...state, handleToggleNavbar, setImage, handleSetTheme }}>
         <Background />
         <ContainerApp />
       </configContex.Provider>
