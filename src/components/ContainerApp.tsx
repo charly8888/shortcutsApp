@@ -1,9 +1,8 @@
 import { useEffect, useState } from 'react'
 import { INITIAL_STATE_OF_GRID_ITEMS } from '../constants'
 import { setGridFirstTime } from '../lib/helpers'
-import AddSlot from './AddSlot'
 import styles from './ContainerApp.module.scss'
-import ConfigurationIcon from './icons/ConfigurationIcon'
+import Navbar from './navbar/Navbar'
 import FolderEditPortal from './portals/edit-portals/FolderEditPortal'
 import PortalOpenedFolder from './portals/PortalOpenedFolder'
 import PortalSelector from './portals/PortalSelector'
@@ -38,11 +37,26 @@ const ContainerApp = () => {
   })
   const [isFolderOpened, setIsFolderOpened] = useState({ boolean: false, id: '' })
 
+  function setTheme(themeSelected: string) {
+    const headLinkElementCss: HTMLAnchorElement | null = document.querySelector('#theme-link')
+    console.log('elemenr', headLinkElementCss)
+    if (headLinkElementCss) {
+      if (themeSelected === 'light') {
+        headLinkElementCss.href = '/src/styles/themeLight.css'
+      } else {
+        headLinkElementCss.href = '/src/styles/themeDark.css'
+      }
+    }
+  }
+
   useEffect(() => {
     const items = JSON.parse(localStorage.getItem('info') || '[]')
     if (!items.length) setIcons(setGridFirstTime())
     else setIcons(items)
-    console.log('hola desde el efect normal ', icons)
+    // console.log('hola desde el efect normal ', icons)
+    console.log('useEfect')
+    const themeSelected = localStorage.getItem('theme') || 'dark'
+    setTheme(themeSelected)
   }, [])
   // console.log(icons)
   useEffect(() => {
@@ -111,11 +125,7 @@ const ContainerApp = () => {
           }
         })}
       </section>
-      <nav className={styles.navSection}>
-        {/* <DeleteIcon className={styles.deleteIcon} /> */}
-        <AddSlot openPortal={() => setModalSelector(true)} />
-        <ConfigurationIcon className={styles.configIcon} />
-      </nav>
+      <Navbar setModalSelector={setModalSelector} />
       {modalSelector && (
         <PortalSelector
           closePortalSelector={() => setModalSelector(false)}

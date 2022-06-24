@@ -96,6 +96,7 @@ const FolderEditPortal: FC<props> = ({ closePortal, sendIcons, modalEdit, setIco
           }}
           widthAndHeightInREM={2.5}
           borderRadius='0 0 1rem'
+          className={styles.buttonClose}
         />
         <section className={styles.containerLeft}>
           <form

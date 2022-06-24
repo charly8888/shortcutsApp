@@ -1,0 +1,60 @@
+.navSection {
+  width: 4rem;
+  height: 100vh;
+  background-color: var(--color-primary);
+  position: fixed;
+  right: 0;
+  top: 0;
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+  flex-direction: column;
+  justify-content: space-between;
+  // transition: 0.3s all ease-in;
+  h3{
+    text-align: center;
+
+  }
+}
+.hiddenAddButton {
+  display: none;
+}
+.configIcon {
+  color: var(--color-gray);
+  width: 4rem;
+}
+.openNav {
+  width: 20rem;
+}
+.containerAddButton {
+  width: 4rem;
+}
+
+.containerConfiguration {
+  // background-color: aqua;
+  width: 100%;
+  // overflow-x: scroll;
+}
+
+.containerSelectorImages {
+  display: grid;
+  grid-auto-flow: column;
+  gap: 1rem;
+  overflow-x: auto;
+  // height: auto;
+  // overscroll-behavior-x: contain;
+  scroll-behavior: smooth;
+  scroll-snap-type: x mandatory;
+  // scrollbar-width: none;
+  // &::-webkit-scrollbar {
+  //   display: none;
+  // }
+  // scroll-behavior: initial;
+  padding: 1rem;
+  img {
+    width: 15rem;
+    aspect-ratio: 16/9;
+    border-radius: 0.5rem;
+    scroll-snap-align: center;
+  }
+}

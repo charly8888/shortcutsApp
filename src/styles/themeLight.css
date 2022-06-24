@@ -1,0 +1,33 @@
+:root {
+  /* Colors */
+  --color-primary: #ffffff;
+  --color-folder-background: #f9fae5;
+  --color-folder-font: #19191a;
+  --background-edit-section: #cacbcc;
+  --background-color-text: #bec4d4;
+  --background-color-textarea: #b3b4b8;
+
+
+  --color-red: #ce3131;
+  --color-green: #13b176;
+  --color-font: #000
+
+
+  --color-blue: #a0ebff;
+  --color-purple: #dbceff;
+
+
+  --color-gray: #454545;
+  --color-lightgray: #cfcfcf;
+
+  /* Shadows */
+  --shadow-sm: 0px 0px 8px rgba(69, 69, 69, 0.3);
+  --shadow-md: 0px 0px 12px rgba(69, 69, 69, 0.5);
+  /* Border-radius */
+  --radius-sm: 0.5rem;
+  --radius-md: 1rem;
+}
+
+body {
+  color: var(--color-font);
+}

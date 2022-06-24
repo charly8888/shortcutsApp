@@ -5,14 +5,12 @@ interface props {
   onClick?: React.MouseEventHandler<HTMLButtonElement>
   widthAndHeightInREM?: number
   margin?: string
-  backgroundColor?: string
   borderRadius?: string
 }
 const ButtonSave: FC<props> = ({
   onClick,
   margin = '0',
   widthAndHeightInREM = 1.8,
-  backgroundColor = '#13b176',
   borderRadius = '50%',
 }) => {
   return (
@@ -22,7 +20,7 @@ const ButtonSave: FC<props> = ({
         width: `${widthAndHeightInREM}rem`,
         height: `${widthAndHeightInREM}rem`,
         margin,
-        backgroundColor: `${backgroundColor}`,
+        backgroundColor: 'var(--color-green)',
         position: 'absolute',
         top: 0,
         right: 0,

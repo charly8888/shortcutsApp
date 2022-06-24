@@ -34,3 +34,10 @@ export interface folder {
 }
 
 export type typesOfSlots = empty | shortcut | folder | text
+
+export interface INITIAL_STATE_REDUCER {
+  backgroundImage: string
+  isNavbarOpen: boolean
+  handleToggleNavbar?: Function
+  setImage?: Function
+}

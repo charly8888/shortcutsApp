@@ -5,7 +5,6 @@ interface props {
   onClick: React.MouseEventHandler<HTMLButtonElement>
   widthAndHeightInREM?: number
   margin?: string
-  backgroundColor?: string
   className?: string
   borderRadius?: string
 }
@@ -13,7 +12,6 @@ const ButtonClose: FC<props> = ({
   onClick,
   margin,
   widthAndHeightInREM = 1.8,
-  backgroundColor = 'red',
   className,
   borderRadius = '50%',
 }) => {
@@ -24,7 +22,6 @@ const ButtonClose: FC<props> = ({
         width: `${widthAndHeightInREM}rem`,
         height: `${widthAndHeightInREM}rem`,
         margin,
-        backgroundColor: `${backgroundColor}`,
         position: 'absolute',
         top: 0,
         left: 0,
@@ -33,6 +30,7 @@ const ButtonClose: FC<props> = ({
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
+        backgroundColor: 'var(--color-red)',
       }}
       className={className}
     >
