@@ -1,5 +1,5 @@
 import { useState } from 'react'
-
+import styles from './PortalForm.module.scss'
 function autenticateFormRegister({ username, password, password2 }) {
   if (username.length < 2) {
     return 'username muy corto'
@@ -61,6 +61,7 @@ const PortalRegisterForm = () => {
           setValueFormRegister
         )
       }
+      className={styles.loginForm}
     >
       <label>
         <p>Username</p>

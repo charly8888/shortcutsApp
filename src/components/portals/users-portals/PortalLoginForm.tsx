@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import styles from './PortalForm.module.scss'
+
 async function handleSubmitLogin(e, user, password) {
   e.preventDefault()
   try {
@@ -25,28 +26,30 @@ async function handleSubmitLogin(e, user, password) {
 const PortalLoginForm = () => {
   const [valueForm, setValueForm] = useState({ username: '', password: '' })
   return (
-    <form
-      onSubmit={(e) => handleSubmitLogin(e, valueForm.username, valueForm.password)}
-      className={styles.loginForm}
-    >
-      <label>
-        <p>Username</p>
-        <input
-          type={'text'}
-          value={valueForm.username}
-          onChange={(e) => setValueForm({ ...valueForm, username: e.target.value })}
-        />
-      </label>
-      <label>
-        <p>Password: </p>
-        <input
-          type={'password'}
-          value={valueForm.password}
-          onChange={(e) => setValueForm({ ...valueForm, password: e.target.value })}
-        />
-      </label>
-      <button>Send</button>
-    </form>
+    <div className={styles.container}>
+      <form
+        onSubmit={(e) => handleSubmitLogin(e, valueForm.username, valueForm.password)}
+        className={styles.loginForm}
+      >
+        <label>
+          <p>Username</p>
+          <input
+            type={'text'}
+            value={valueForm.username}
+            onChange={(e) => setValueForm({ ...valueForm, username: e.target.value })}
+          />
+        </label>
+        <label>
+          <p>Password: </p>
+          <input
+            type={'password'}
+            value={valueForm.password}
+            onChange={(e) => setValueForm({ ...valueForm, password: e.target.value })}
+          />
+        </label>
+        <button>Send</button>
+      </form>
+    </div>
   )
 }
 

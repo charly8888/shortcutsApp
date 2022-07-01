@@ -24,8 +24,18 @@ const Navbar = ({ setModalSelector, setModalFormUsers }) => {
 
   return (
     <nav className={`${styles.navSection} ${isNavbarOpen && styles.openNav}`}>
-      <button onClick={() => setModalFormUsers({ login: true, register: false })}>Login</button>
-      <button onClick={() => setModalFormUsers({ login: false, register: true })}>Register</button>
+      <button
+        onClick={() => setModalFormUsers({ login: true, register: false })}
+        className={`${!isNavbarOpen && styles.hiddenAddButton}`}
+      >
+        Login
+      </button>
+      <button
+        onClick={() => setModalFormUsers({ login: false, register: true })}
+        className={`${!isNavbarOpen && styles.hiddenAddButton}`}
+      >
+        Register
+      </button>
 
       <div className={` ${styles.containerAddButton} ${isNavbarOpen && styles.hiddenAddButton}`}>
         <AddButton openPortal={() => setModalSelector(true)} />
