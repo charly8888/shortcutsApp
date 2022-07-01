@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import ButtonClose from '../../UIComponents/ButtonClose'
 import styles from './PortalForm.module.scss'
 function autenticateFormRegister({ username, password, password2 }) {
   if (username.length < 2) {
@@ -43,7 +44,7 @@ async function handleSubmitRegister(e, user, password, setValueFormRegister) {
   }
 }
 
-const PortalRegisterForm = () => {
+const PortalRegisterForm = ({ setModalFormUsers }) => {
   const [valueFormRegister, setValueFormRegister] = useState({
     username: '',
     password: '',
@@ -90,6 +91,8 @@ const PortalRegisterForm = () => {
         />
       </label>
       <button disabled={isFormValid !== 'todo Ok'}>Register</button>
+
+      <ButtonClose onClick={() => setModalFormUsers({ login: false, register: false })} />
     </form>
   )
 }

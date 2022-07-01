@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from 'react'
-import { INITIAL_STATE_OF_GRID_ITEMS } from '../constants'
+import { iconsContext } from '../App'
 import { configContex } from '../context/configContext'
 import { setGridFirstTime } from '../lib/helpers'
 import styles from './ContainerApp.module.scss'
@@ -17,7 +17,7 @@ import ShortcutSlot from './Slots/ShorcutSlot'
 import TextSlot from './Slots/TextSlot'
 
 const ContainerApp = () => {
-  const [icons, setIcons] = useState(INITIAL_STATE_OF_GRID_ITEMS)
+  const { icons, setIcons } = useContext(iconsContext)
   const [modalSelector, setModalSelector] = useState(false)
   const [modalShortcut, setModalShortcut] = useState({
     boolean: false,
@@ -42,6 +42,7 @@ const ContainerApp = () => {
   const [modalFormUsers, setModalFormUsers] = useState({ login: false, register: false })
 
   const { handleSetTheme, currentTheme } = useContext(configContex)
+
   useEffect(() => {
     const items = JSON.parse(localStorage.getItem('info') || '[]')
     if (!items.length) setIcons(setGridFirstTime())
@@ -50,7 +51,6 @@ const ContainerApp = () => {
     handleSetTheme(currentTheme)
   }, [])
 
-  // console.log(icons)
   useEffect(() => {
     if (icons.length) {
       localStorage.setItem('info', JSON.stringify(icons))
@@ -165,8 +165,8 @@ const ContainerApp = () => {
           setIcons={setIcons}
         />
       )}
-      {modalFormUsers.login && <PortalLoginForm />}
-      {modalFormUsers.register && <PortalRegisterForm />}
+      {modalFormUsers.login && <PortalLoginForm setModalFormUsers={setModalFormUsers} />}
+      {modalFormUsers.register && <PortalRegisterForm setModalFormUsers={setModalFormUsers} />}
     </main>
   )
 }

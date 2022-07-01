@@ -1,7 +1,11 @@
-import { useState } from 'react'
+import { useContext, useState } from 'react'
+import { iconsContext } from '../../../App'
+import { usersContext } from '../../../context/usersContext'
+import setNewsIconsFromDB from '../../../lib/helpers/setNewsIconsFromDB'
+import ButtonClose from '../../UIComponents/ButtonClose'
 import styles from './PortalForm.module.scss'
 
-async function handleSubmitLogin(e, user, password) {
+async function handleSubmitLogin(e, user, password, setStateUserContext, setIcons) {
   e.preventDefault()
   try {
     const result = await fetch(`http://localhost:3333/getUser`, {
@@ -16,6 +20,10 @@ async function handleSubmitLogin(e, user, password) {
 
     if (result.ok) {
       console.log('all OK', data)
+
+      localStorage.setItem('infoUser', JSON.stringify({ user: data.user, jwt: data.jwt }))
+      setStateUserContext({ user: data.user })
+      setNewsIconsFromDB({ user: data.user, jwt: data.jwt, setIcons })
     } else {
       console.log(data)
     }
@@ -23,12 +31,23 @@ async function handleSubmitLogin(e, user, password) {
     console.log('error', e)
   }
 }
-const PortalLoginForm = () => {
+const PortalLoginForm = ({ setModalFormUsers }) => {
   const [valueForm, setValueForm] = useState({ username: '', password: '' })
+  const { stateUserContext, setStateUserContext } = useContext(usersContext)
+  const { setIcons } = useContext(iconsContext)
+
   return (
     <div className={styles.container}>
       <form
-        onSubmit={(e) => handleSubmitLogin(e, valueForm.username, valueForm.password)}
+        onSubmit={(e) =>
+          handleSubmitLogin(
+            e,
+            valueForm.username,
+            valueForm.password,
+            setStateUserContext,
+            setIcons
+          )
+        }
         className={styles.loginForm}
       >
         <label>
@@ -48,6 +67,7 @@ const PortalLoginForm = () => {
           />
         </label>
         <button>Send</button>
+        <ButtonClose onClick={() => setModalFormUsers({ login: false, register: false })} />
       </form>
     </div>
   )
