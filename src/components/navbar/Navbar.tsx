@@ -7,7 +7,7 @@ import styles from './Navbar.module.scss'
 
 const keyPropsOfImages = Object.getOwnPropertyNames(IMAGES)
 
-const Navbar = ({ setModalSelector }) => {
+const Navbar = ({ setModalSelector, setModalFormUsers }) => {
   const { handleToggleNavbar, isNavbarOpen, setImage, handleSetTheme, currentTheme } =
     useContext(configContex)
   function changeTheme() {
@@ -24,6 +24,9 @@ const Navbar = ({ setModalSelector }) => {
 
   return (
     <nav className={`${styles.navSection} ${isNavbarOpen && styles.openNav}`}>
+      <button onClick={() => setModalFormUsers({ login: true, register: false })}>Login</button>
+      <button onClick={() => setModalFormUsers({ login: false, register: true })}>Register</button>
+
       <div className={` ${styles.containerAddButton} ${isNavbarOpen && styles.hiddenAddButton}`}>
         <AddButton openPortal={() => setModalSelector(true)} />
       </div>

@@ -1,0 +1,18 @@
+### Opcion para crear un usuario
+POST http://localhost:3333/setUser
+Content-Type: application/json
+
+{
+  "user": "Charly8888",
+  "password": "asdasdw3sdasd23s"
+}
+
+### Opción para obtener un usuario
+
+POST http://localhost:3333/getUser
+Content-Type: application/json
+
+{
+  "user": "88888888",
+  "password": "88888888"
+}

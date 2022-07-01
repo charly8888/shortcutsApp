@@ -9,6 +9,8 @@ import PortalOpenedFolder from './portals/PortalOpenedFolder'
 import PortalSelector from './portals/PortalSelector'
 import PortalShortcut from './portals/PortalShortcut'
 import PortalText from './portals/PortalText'
+import PortalLoginForm from './portals/users-portals/PortalLoginForm'
+import PortalRegisterForm from './portals/users-portals/PortalRegisterForm'
 import EmptySlot from './Slots/EmptySlot'
 import FolderSlot from './Slots/FolderSlot'
 import ShortcutSlot from './Slots/ShorcutSlot'
@@ -37,6 +39,7 @@ const ContainerApp = () => {
     isNew: false,
   })
   const [isFolderOpened, setIsFolderOpened] = useState({ boolean: false, id: '' })
+  const [modalFormUsers, setModalFormUsers] = useState({ login: false, register: false })
 
   const { handleSetTheme, currentTheme } = useContext(configContex)
   useEffect(() => {
@@ -114,7 +117,7 @@ const ContainerApp = () => {
           }
         })}
       </section>
-      <Navbar setModalSelector={setModalSelector} />
+      <Navbar setModalSelector={setModalSelector} setModalFormUsers={setModalFormUsers} />
       {modalSelector && (
         <PortalSelector
           closePortalSelector={() => setModalSelector(false)}
@@ -162,6 +165,8 @@ const ContainerApp = () => {
           setIcons={setIcons}
         />
       )}
+      {modalFormUsers.login && <PortalLoginForm />}
+      {modalFormUsers.register && <PortalRegisterForm />}
     </main>
   )
 }
