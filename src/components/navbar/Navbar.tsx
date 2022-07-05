@@ -1,4 +1,5 @@
 import { useContext, useState } from 'react'
+import { iconsContext } from '../../App'
 import { IMAGES } from '../../constants'
 import { configContex } from '../../context/configContext'
 import { usersContext } from '../../context/usersContext'
@@ -13,6 +14,7 @@ const Navbar = ({ setModalSelector, setModalFormUsers }) => {
     useContext(configContex)
 
   const { stateUserContext, setStateUserContext } = useContext(usersContext)
+  const { setIcons } = useContext(iconsContext)
 
   console.log(stateUserContext, setStateUserContext)
   function changeTheme() {
@@ -48,7 +50,7 @@ const Navbar = ({ setModalSelector, setModalFormUsers }) => {
         <>
           <h1 className={`${!isNavbarOpen && styles.hiddenAddButton}`}>{stateUserContext.user}</h1>
           <button
-            onClick={() => handleLogOut(setStateUserContext)}
+            onClick={() => handleLogOut(setStateUserContext, setIcons)}
             className={`${!isNavbarOpen && styles.hiddenAddButton}`}
           >
             Logout
@@ -75,8 +77,10 @@ const Navbar = ({ setModalSelector, setModalFormUsers }) => {
     </nav>
   )
 }
-function handleLogOut(setStateUserContext) {
+function handleLogOut(setStateUserContext, setIcons) {
   setStateUserContext({ user: null })
   localStorage.setItem('infoUser', null)
+  const items = JSON.parse(localStorage.getItem('info') || '[]')
+  setIcons(items)
 }
 export default Navbar

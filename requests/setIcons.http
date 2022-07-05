@@ -6,12 +6,13 @@ Authorization: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiODg4ODg4
 
 ###
 
-POST http://localhost:3333/setInfo
+PUT  http://localhost:3333/setInfo/88888888
 Content-Type: application/json
+Authorization: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjoiODg4ODg4ODgiLCJpZFVzZXIiOiJaTGRNV3JHVTZwbDgwOWJ4SHZ3Q1MiLCJpYXQiOjE2NTY2ODk2MjF9.h8QqQ1oDnMsDfwDljOn9N6DqcSFFartT0xnf2u57uG4"
 
 {
   "user": "88888888",
-  "info": [{"id":"L5qpgBeLhzk4YX9RBSuHB","type":"shortcut","link":"https://www.duolingo.com/","title":"Duolingo"}]
+  "info": [{"id":"L5qpgBeLhzk4YX9RBSuHB","type":"shortcut","link":"https://www.duolingo.com/","title":"dasdasdasdasd"}]
 }
 
 ### 

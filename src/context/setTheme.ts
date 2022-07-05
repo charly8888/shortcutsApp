@@ -16,6 +16,7 @@ const setTheme = (theme: string) => {
         'background-edit-section': '#4c5265',
         'background-color-text': '#202124',
         'background-color-textarea': '#303134',
+        'tertiary': '#9ca3af',
 
         'color-green': '#13b176',
         'color-red': '#ce3131',
@@ -37,6 +38,8 @@ const setTheme = (theme: string) => {
         'background-edit-section': '#cacbcc',
         'background-color-text': '#bec4d4',
         'background-color-textarea': '#b3b4b8',
+
+        'tertiary': '#9ca3af',
 
         'color-red': '#ce3131',
         'color-green': '#13b176',

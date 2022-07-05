@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from 'react'
 import { iconsContext } from '../App'
 import { configContex } from '../context/configContext'
+import { fetchSetIcons } from '../lib/apis'
 import { setGridFirstTime } from '../lib/helpers'
 import styles from './ContainerApp.module.scss'
 import Navbar from './navbar/Navbar'
@@ -44,20 +45,47 @@ const ContainerApp = () => {
   const { handleSetTheme, currentTheme } = useContext(configContex)
 
   useEffect(() => {
-    const items = JSON.parse(localStorage.getItem('info') || '[]')
-    if (!items.length) setIcons(setGridFirstTime())
-    else setIcons(items)
-    console.log(currentTheme)
-    handleSetTheme(currentTheme)
+    if (localStorage.getItem('infoUser') === 'null') {
+      const items = JSON.parse(localStorage.getItem('info') || '[]')
+      if (!items.length) setIcons(setGridFirstTime())
+      else setIcons(items)
+      console.log(currentTheme)
+      handleSetTheme(currentTheme)
+    } else {
+      const items = JSON.parse(localStorage.getItem('infoDatabase') || '[]')
+      handleSetTheme(currentTheme)
+      setIcons(items)
+    }
   }, [])
 
   useEffect(() => {
-    if (icons.length) {
-      localStorage.setItem('info', JSON.stringify(icons))
+    // console.log(localStorage.getItem('infoUser') === "null")
+    if (localStorage.getItem('infoUser') === 'null') {
+      if (icons.length) {
+        localStorage.setItem('info', JSON.stringify(icons))
+      }
+    } else {
+      // console.log("se ejecuta")
+      if (icons.length) {
+        localStorage.setItem('infoDatabase', JSON.stringify(icons))
+      }
+      setIconsInDB()
     }
-    console.log('hola desde el effect de icons', icons)
   }, [icons])
 
+  async function setIconsInDB() {
+    console.log('tratando de usar')
+    const { jwt, user } = JSON.parse(localStorage.getItem('infoUser')) || ''
+
+    try {
+      const response = await fetchSetIcons(user, icons, jwt)
+      const data = await response.json()
+      console.log(data)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+  
   return (
     <main className={styles.containerApp}>
       <section className={styles.gridTemplate}>
