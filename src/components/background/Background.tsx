@@ -8,7 +8,7 @@ const Background = () => {
   return (
     <div className={styles.background}>
       <img src={IMAGES[backgroundImage]} />
-      <h5>Beta version, don&#39;t save anything that you can&#39;t permit lose it</h5>
+      {/* <h5>Beta version, don&#39;t save anything that you can&#39;t permit lose it</h5> */}
     </div>
   )
 }

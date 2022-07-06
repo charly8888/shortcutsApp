@@ -45,7 +45,7 @@ const ContainerApp = () => {
   const { handleSetTheme, currentTheme } = useContext(configContex)
 
   useEffect(() => {
-    if (localStorage.getItem('infoUser') === 'null') {
+    if (!localStorage.getItem('infoUser')) {
       const items = JSON.parse(localStorage.getItem('info') || '[]')
       if (!items.length) setIcons(setGridFirstTime())
       else setIcons(items)
@@ -60,7 +60,7 @@ const ContainerApp = () => {
 
   useEffect(() => {
     // console.log(localStorage.getItem('infoUser') === "null")
-    if (localStorage.getItem('infoUser') === 'null') {
+    if (!localStorage.getItem('infoUser')) {
       if (icons.length) {
         localStorage.setItem('info', JSON.stringify(icons))
       }
@@ -85,7 +85,7 @@ const ContainerApp = () => {
       console.log(error)
     }
   }
-  
+
   return (
     <main className={styles.containerApp}>
       <section className={styles.gridTemplate}>

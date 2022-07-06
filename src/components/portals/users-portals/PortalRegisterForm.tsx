@@ -9,7 +9,7 @@ function autenticateFormRegister({ username, password, password2 }) {
       case: 'username',
       message: '* Username muy corto',
     }
-  } else if (username.length > 32) {
+  } else if (username.length > 16) {
     return {
       case: 'username',
       message: '* Username muy largo',
@@ -30,7 +30,10 @@ function autenticateFormRegister({ username, password, password2 }) {
       message: '* Contraseñas no coinciden',
     }
   } else {
-    return true
+    return {
+      case: true,
+      message: 'All ok',
+    }
   }
 }
 
@@ -100,13 +103,13 @@ const PortalRegisterForm = ({ setModalFormUsers }) => {
         onChange={(e) => setValueFormRegister({ ...valueFormRegister, password2: e.target.value })}
       />
       {isFormValid.case === 'comprobation' && <p>{isFormValid.message}</p>}
-      <button disabled={isFormValid !== true} className={styles.buttonAceppt}>
+      <button disabled={isFormValid.case !== true} className={styles.buttonAceppt}>
         Register
       </button>
 
       <ButtonClose
         onClick={() => setModalFormUsers({ login: false, register: false })}
-        borderRadius={' .5rem 0'}
+        borderRadius={'.5rem 0'}
       />
     </form>
   )
