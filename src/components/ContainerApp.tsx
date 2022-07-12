@@ -25,6 +25,7 @@ const ContainerApp = () => {
     id: '',
     link: '',
     title: '',
+    iconLink: '',
   })
 
   const [modalText, setModalText] = useState({
@@ -135,6 +136,7 @@ const ContainerApp = () => {
                   id={icon.id}
                   title={icon.title}
                   link={icon.link}
+                  iconLink={icon.iconLink}
                   icons={icons}
                   setIcons={setIcons}
                   setModalShortcut={setModalShortcut}
@@ -150,7 +152,7 @@ const ContainerApp = () => {
         <PortalSelector
           closePortalSelector={() => setModalSelector(false)}
           openPortalShortcut={() =>
-            setModalShortcut({ boolean: true, id: '', link: '', title: '' })
+            setModalShortcut({ boolean: true, id: '', link: '', title: '', iconLink: '' })
           }
           openPortalFolder={() =>
             setModalEdit({ boolean: true, id: '', type: 'folder', isNew: true })
@@ -162,7 +164,9 @@ const ContainerApp = () => {
         <PortalShortcut
           setIcons={setIcons}
           icons={icons}
-          closePortal={() => setModalShortcut({ boolean: false, id: '', link: '', title: '' })}
+          closePortal={() =>
+            setModalShortcut({ boolean: false, id: '', link: '', title: '', iconLink: '' })
+          }
           modalShortcut={modalShortcut}
         />
       )}

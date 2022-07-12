@@ -16,7 +16,7 @@
   display: flex;
   flex-direction: column;
   position: relative;
-  padding: 0 1.5rem 1.5rem 1.5rem;
+  // padding: 0 .2rem .2rem .2rem;
   background-color: var(--background-color-text);
   border-radius: var(--radius-md);
   color: var(--color-folder-font);
@@ -26,7 +26,6 @@
     background-color: var(--background-color-textarea);
     color: var(--color-font);
     border: none;
-    border-radius: var(--radius-sm);
     padding: 0.5rem;
   }
 }

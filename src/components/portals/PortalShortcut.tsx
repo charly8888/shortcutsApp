@@ -10,12 +10,12 @@ interface props {
   setIcons: any
   icons: typesOfSlots[]
   idFolder?: string
-  modalShortcut: { boolean: boolean; link: string; title: string; id: string }
+  modalShortcut: { boolean: boolean; link: string; title: string; id: string; iconLink: string }
 }
 const PortalShortcut: FC<props> = ({ closePortal, setIcons, icons, idFolder, modalShortcut }) => {
-  console.log(modalShortcut)
-  const { link, title, id } = modalShortcut
-  const [information, setInformation] = useState({ link, title, id })
+  // console.log(modalShortcut)
+  const { link, title, id, iconLink } = modalShortcut
+  const [information, setInformation] = useState({ link, title, id, iconLink })
 
   return createPortal(
     <main className={styles.containerGlobal}>
@@ -43,6 +43,13 @@ const PortalShortcut: FC<props> = ({ closePortal, setIcons, icons, idFolder, mod
           value={information.link}
           onChange={(e) => setInformation({ ...information, link: e.target.value })}
           placeholder='https://google.com'
+        />
+        <p>Icon personalized ( optional )</p>
+        <input
+          name='iconLink'
+          value={information.iconLink}
+          onChange={(e) => setInformation({ ...information, iconLink: e.target.value })}
+          placeholder='https://iconsstore.com/icon3.png'
         />
       </form>
     </main>,

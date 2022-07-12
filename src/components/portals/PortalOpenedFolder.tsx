@@ -46,6 +46,7 @@ const PortalOpenedFolder: FC<props> = ({ closePortal, icons, setIcons, idFolder 
     id: '',
     link: '',
     title: '',
+    iconLink: '',
   })
 
   return createPortal(
@@ -116,7 +117,7 @@ const PortalOpenedFolder: FC<props> = ({ closePortal, icons, setIcons, idFolder 
             setModalEdit({ boolean: true, id: '', type: 'text', isNew: true, idFolder })
           }
           openPortalShortcut={() =>
-            setModalShortcut({ boolean: true, id: '', link: '', title: '' })
+            setModalShortcut({ boolean: true, id: '', link: '', title: '', iconLink: '' })
           }
           isFolder={true}
         />
@@ -134,7 +135,9 @@ const PortalOpenedFolder: FC<props> = ({ closePortal, icons, setIcons, idFolder 
         <PortalShortcut
           setIcons={setIcons}
           icons={icons}
-          closePortal={() => setModalShortcut({ boolean: false, id: '', link: '', title: '' })}
+          closePortal={() =>
+            setModalShortcut({ boolean: false, id: '', link: '', title: '', iconLink: '' })
+          }
           idFolder={idFolder}
           modalShortcut={modalShortcut}
         />

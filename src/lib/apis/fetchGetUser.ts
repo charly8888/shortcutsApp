@@ -1,7 +1,6 @@
 export const fetchGetUser = async (user, password) => {
-  console.log(import.meta.env.VITE_HOST)
-  // return await fetch(`${import.meta.env.VITE_HOST}getUser`, {
-    return await fetch(`https://shortcut-app.herokuapp.com/getUser`, {
+  return await fetch(`${import.meta.env.VITE_HOST}getUser`, {
+    // return await fetch(`https://shortcut-app.herokuapp.com/getUser`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -9,4 +8,3 @@ export const fetchGetUser = async (user, password) => {
     body: JSON.stringify({ user, password }),
   })
 }
-

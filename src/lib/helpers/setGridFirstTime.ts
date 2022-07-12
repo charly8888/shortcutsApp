@@ -19,6 +19,7 @@ export const setGridFirstTime = () => {
     title: 'My web',
     primaryColor: '',
     secondaryColor: '',
+    iconLink: '',
   }
 
   newarr[3] = {
@@ -51,6 +52,7 @@ export const setGridFirstTime = () => {
         title: 'Chrome',
         primaryColor: '',
         secondaryColor: '',
+        iconLink: '',
       },
       {
         id: 'nwRynMItteMvdBx6kV72V',
@@ -59,6 +61,7 @@ export const setGridFirstTime = () => {
         title: 'Firefox',
         primaryColor: '',
         secondaryColor: '',
+        iconLink: '',
       },
     ],
   }

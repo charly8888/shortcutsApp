@@ -11,6 +11,7 @@ export interface shortcut {
   type: 'shortcut'
   title: string
   link: string
+  iconLink: string
   primaryColor: string
   secondaryColor: string
 }

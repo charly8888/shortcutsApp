@@ -10,6 +10,7 @@ export function addNewShortcut(
     link: string
     title: string
     id: string
+    iconLink: string
   },
   idFolder?: string
 ) {
@@ -25,6 +26,7 @@ export function addNewShortcut(
 
       target.link = information.link
       target.title = information.title
+      target.iconLink = information.iconLink
 
       setIcons(newIcons)
     } else {
@@ -35,6 +37,7 @@ export function addNewShortcut(
         id,
         type: 'shortcut',
         link: information.link,
+        iconLink: information.iconLink,
         title: information.title,
       })
 
@@ -49,6 +52,7 @@ export function addNewShortcut(
         type: 'shortcut',
         link: information.link,
         title: information.title,
+        iconLink: information.iconLink,
       } as shortcut
 
       setIcons(newIcons)
@@ -59,6 +63,7 @@ export function addNewShortcut(
         id: newIcons[indexOfFirstEmpty].id,
         type: 'shortcut',
         link: information.link,
+        iconLink: information.iconLink,
         title: information.title,
       } as shortcut
 

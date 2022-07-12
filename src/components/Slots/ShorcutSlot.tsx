@@ -14,6 +14,7 @@ interface props {
   link: string
   setModalShortcut: Function
   idFolder?: string
+  iconLink?: string
 }
 const regex = /[(http(s)?):\/\/(www\.)?a-zA-Z0-9@:%.\-_\+~#=]{2,256}\.[a-z]{2,6}/g
 
@@ -27,7 +28,9 @@ const ShortcutSlot: FC<props> = ({
   setIcons,
   setModalShortcut,
   idFolder,
+  iconLink,
 }) => {
+  const src = iconLink || `${returnDomain(link)}/favicon.ico`
   return (
     <div
       className={` ${stylesGenerals.sizeGrid} ${styles.gridItem}`}
@@ -40,7 +43,7 @@ const ShortcutSlot: FC<props> = ({
       id={id}
     >
       <div className={styles.containerContent}>
-        <img src={`${returnDomain(link)}/favicon.ico`} />
+        <img src={src} />
       </div>
       <a
         href={link}
@@ -52,7 +55,7 @@ const ShortcutSlot: FC<props> = ({
       <ButtonEdit
         className={`${styles.closeButton} ${styles.editButton}`}
         onClick={() => {
-          setModalShortcut({ boolean: true, id, title, link, idFolder })
+          setModalShortcut({ boolean: true, id, title, link, idFolder, iconLink })
           console.log('hola')
         }}
         widthAndHeightInREM={1.2}
