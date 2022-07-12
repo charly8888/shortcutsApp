@@ -16,3 +16,6 @@ Content-Type: application/json
   "user": "88888888",
   "password": "88888888"
 }
+
+###
+GET http://localhost:3333/
